@@ -4,7 +4,7 @@ namespace ClassLibrary
 {
     public class clsStock
     {
-        public DateTime DateAdded { get; set; }
+        public DateTime DateOrdered { get; set; }
         public int StockID { get; set; }
         public string StockDescription { get; set; }
         public string StockColour { get; set; }
