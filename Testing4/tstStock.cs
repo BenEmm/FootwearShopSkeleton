@@ -125,10 +125,10 @@ namespace Testing4
             DateTime TestData = DateTime.Now.Date;
 
             //Assign the data to the property
-            AStock.DateAdded = TestData;
+            AStock.DateOrdered = TestData;
 
             //Test to see if the two values are the same
-            Assert.AreEqual(AStock.DateAdded, TestData);
+            Assert.AreEqual(AStock.DateOrdered, TestData);
 
         }
 
