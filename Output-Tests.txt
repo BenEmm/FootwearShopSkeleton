@@ -1,0 +1,9 @@
+﻿[04/02/2021 20:23:34 Informational] ------ Discover test started ------
+[04/02/2021 20:23:39 Informational] ========== Discover test finished: 27 found (0:00:05.2980063) ==========
+[04/02/2021 20:23:39 Informational] ------ Run test started ------
+[04/02/2021 20:23:42 Informational] ========== Run test finished: 27 run (0:00:02.972054) ==========
+[05/02/2021 09:47:43 Warning] Build failed or it was cancelled.
+[05/02/2021 10:10:52 Informational] ------ Discover test started ------
+[05/02/2021 10:10:54 Informational] ========== Discover test finished: 35 found (0:00:01.8598985) ==========
+[05/02/2021 10:10:54 Informational] ------ Run test started ------
+[05/02/2021 10:10:57 Informational] ========== Run test finished: 35 run (0:00:02.5556579) ==========
