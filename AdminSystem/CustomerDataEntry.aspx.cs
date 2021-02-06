@@ -17,14 +17,30 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         // Create a new instance of clsCustomer
         clsCustomer ACustomer = new clsCustomer();
-
+        // Captures the customerID
+        ACustomer.CustomerID = int.Parse(txtCustomerID.Text);
+        // Captures the First Name
+        ACustomer.FirstName = txtFirstName.Text;
+        // Captures the Surname
+        ACustomer.Surname = txtSurname.Text;
         // Capture the house number
         ACustomer.AddressNo = int.Parse(txtAddressNo.Text);
-
-        // Store the address in the session object
+        // Captures the Address
+        ACustomer.Address = txtAddress.Text;
+        // Captures the Postcode
+        ACustomer.PostCode = txtPostcode.Text;
+        // Captures the Email
+        ACustomer.Email = txtEmail.Text;
+        // Captures the Account Creation Date 
+        ACustomer.AccountCreationDate = DateTime.Parse(txtDate.Text);
+        // Captures whether the person is a customer or not
+        ACustomer.IsCustomer = chkConfirm.Checked;
+        //Captures the total a customer has spent
+        ACustomer.TotalSpent = decimal.Parse(txtTotalSpent.Text);
+ // ----------------------------------------------------------------- //
+        // Stores all the captured data in the session object
         Session["ACustomer"] = ACustomer;
-
-        // Navigate to the viewer page
+        // Navigates to the CustomerViewer page
         Response.Redirect("CustomerViewer.aspx");
     }
 
