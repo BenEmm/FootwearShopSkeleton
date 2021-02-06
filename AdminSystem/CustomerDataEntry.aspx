@@ -29,16 +29,16 @@
         <asp:TextBox ID="txtPostcode" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="lblEmail" runat="server" Text="Email: " width="86px"></asp:Label>
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="lblAccountCreationDate" runat="server" Text="Account Creation Date: " width="86px"></asp:Label>
-        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtDate" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="lblCustomer" runat="server" Text="Is Customer: " width="86px"></asp:Label>
-        <asp:CheckBox ID="Confirm" runat="server" />
+        <asp:CheckBox ID="chkConfirm" runat="server" />
         <br />
         <asp:Label ID="lblTotalSpent" runat="server" Text="Total Spent: " width="86px"></asp:Label>
-        <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtTotalSpent" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
         <br />
