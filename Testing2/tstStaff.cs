@@ -43,16 +43,16 @@ namespace Testing2
         }
 
         [TestMethod]
-        public void PasswordOK()
+        public void SalaryOK()
         {
             //create an instance of the class we want to create
             clsStaff AStaff = new clsStaff();
             //create some test data to assign to the property
-            string TestData = "Password1";
+            double TestData = 7.78;
             //assign the data to the property
-            AStaff.Password = TestData;
+            AStaff.Salary = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AStaff.Password, TestData);
+            Assert.AreEqual(AStaff.Salary, TestData);
         }
 
         [TestMethod]
@@ -154,7 +154,7 @@ namespace Testing2
         }
 
         [TestMethod]
-        public void PasswordFound()
+        public void SalaryFound()
         {
             //create an instance of the class we want to create
             clsStaff AStaff = new clsStaff();
@@ -167,7 +167,7 @@ namespace Testing2
             //invoke the method 
             found = AStaff.Find(StaffID);
             //check the staffID
-            if (AStaff.Password != "Password1")
+            if (AStaff.Salary != 7.78)
             {
                 OK = false;
             }
