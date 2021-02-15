@@ -17,7 +17,7 @@ public partial class _1Viewer : System.Web.UI.Page
         //display details
         Response.Write(AStaff.StaffID + "\n");
         Response.Write(AStaff.FullName + "\n");
-        Response.Write(AStaff.Password + "\n");
+        Response.Write(AStaff.Salary + "\n");
         Response.Write(AStaff.DateOfLeaving + "\n");
         Response.Write(AStaff.Positon + "\n");
         Response.Write(AStaff.FullTime + "\n");

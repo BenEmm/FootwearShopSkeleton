@@ -30,16 +30,16 @@ namespace ClassLibrary
             }
         }
 
-        private string mPassword;
-        public string Password
+        private double mSalary;
+        public double Salary
         {
             get
             {
-                return mPassword;
+                return mSalary;
             }
             set
             {
-                mPassword = value;
+                mSalary = value;
             }
         }
 
@@ -86,7 +86,7 @@ namespace ClassLibrary
         {
             mStaffID = 21;
             mFullName = "Full Name";
-            mPassword = "Password1";
+            mSalary = 7.78;
             mDateOfLeaving = Convert.ToDateTime("16/09/2020");
             mPosition = "Weekend Staff";
             mFullTime = false;

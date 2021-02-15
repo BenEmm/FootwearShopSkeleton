@@ -22,7 +22,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //capture fullname
         AStaff.FullName = txtFullName.Text;
         //capture password
-        AStaff.Password = txtPassword.Text;
+        AStaff.Salary = double.Parse(txtSalary.Text);
         //capture date of leaving
         AStaff.DateOfLeaving = DateTime.Parse(txtDateOfLeaving.Text);
         //capture position
