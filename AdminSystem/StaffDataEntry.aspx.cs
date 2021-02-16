@@ -21,17 +21,43 @@ public partial class _1_DataEntry : System.Web.UI.Page
         AStaff.StaffID = int.Parse(txtStaffID.Text);
         //capture fullname
         AStaff.FullName = txtFullName.Text;
-        //capture password
+        //capture salary
         AStaff.Salary = double.Parse(txtSalary.Text);
         //capture date of leaving
-        AStaff.DateOfLeaving = DateTime.Parse(txtDateOfLeaving.Text);
+        AStaff.DateOfJoining = DateTime.Parse(txtDateOfJoining.Text);
         //capture position
         AStaff.Positon = txtPositon.Text;
         //capture full time
         AStaff.FullTime = chkFullTime.Checked;
+        //capture active
+        AStaff.Active = chkActive.Checked;
         //store the staff in the session object
         Session["AStaff"] = AStaff;
         //nagivate to viewer page
         Response.Redirect("StaffViewer.aspx");
+    }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create and instance of the staff class
+        clsStaff AStaff = new clsStaff();
+        //variable to store the primary key 
+        Int32 StaffID;
+        //Variable to store the result of the find operation
+        Boolean Found = false;
+        StaffID = Convert.ToInt32(txtStaffID.Text);
+        //find the record
+        Found = AStaff.Find(StaffID);
+        //if found 
+        if (Found == true)
+        {
+            txtStaffID.Text = AStaff.StaffID.ToString();
+            txtFullName.Text = AStaff.FullName;
+            txtSalary.Text = AStaff.Salary.ToString();
+            txtDateOfJoining.Text = AStaff.DateOfJoining.ToString();
+            txtPositon.Text = AStaff.Positon;
+            chkFullTime.Checked = AStaff.FullTime;
+            chkActive.Checked = AStaff.Active;
+        }
     }
 }

@@ -19,18 +19,22 @@
         <asp:Label ID="lblSalary" runat="server" Text="Salary" width="130px"></asp:Label>
         <asp:TextBox ID="txtSalary" runat="server"></asp:TextBox>
         <p>
-            <asp:Label ID="ldlDateOfLeaving" runat="server" Text="Date Of Leaving"></asp:Label>
-            <asp:TextBox ID="txtDateOfLeaving" runat="server"></asp:TextBox>
+            <asp:Label ID="ldlDateOfJoining" runat="server" Text="Date Of Joining"></asp:Label>
+            <asp:TextBox ID="txtDateOfJoining" runat="server"></asp:TextBox>
         </p>
         <asp:Label ID="lblPosition" runat="server" Text="Position" width="130px"></asp:Label>
         <asp:TextBox ID="txtPositon" runat="server"></asp:TextBox>
         <p>
             <asp:CheckBox ID="chkFullTime" runat="server" Text="Full Time" />
         </p>
+        <asp:CheckBox ID="chkActive" runat="server" Text="Active" />
+        <p>
         <asp:Label ID="lblError" runat="server"></asp:Label>
+        </p>
         <p>
             <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click1" />
             <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+            <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="Find" />
         </p>
     </form>
 </body>
