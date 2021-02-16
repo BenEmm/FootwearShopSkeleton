@@ -23,7 +23,7 @@ namespace Testing1
             clsCustomer ACustomer = new clsCustomer();
 
             // Create some test data to assign to the property
-            Int32 TestData = 32452;
+            Int32 TestData = 8;
 
             // Assign the data to the property
             ACustomer.CustomerID = TestData;
@@ -39,7 +39,7 @@ namespace Testing1
             clsCustomer ACustomer = new clsCustomer();
 
             // Create some test data to assign to the property
-            String TestData = "Name";
+            String TestData = "Jeff";
 
             // Assign the data to the property
             ACustomer.FirstName = TestData;
@@ -55,7 +55,7 @@ namespace Testing1
             clsCustomer ACustomer = new clsCustomer();
 
             // Create some test data to assign to the property
-            String TestData = "Name";
+            String TestData = "Jefferson";
 
             // Assign the data to the property
             ACustomer.Surname = TestData;
@@ -71,7 +71,7 @@ namespace Testing1
             clsCustomer ACustomer = new clsCustomer();
 
             // Create some test data to assign to the property
-            String TestData = "JohnSmith@hotmail.com";
+            String TestData = "Jeff@Jeff.com";
 
             // Assign the data to the property
             ACustomer.Email = TestData;
@@ -119,7 +119,7 @@ namespace Testing1
             clsCustomer ACustomer = new clsCustomer();
 
             // Create some test data to assign to the property
-            Int32 TestData = 1;
+            Int32 TestData = 12;
 
             // Assign the data to the property
             ACustomer.AddressNo = TestData;
@@ -135,7 +135,7 @@ namespace Testing1
             clsCustomer ACustomer = new clsCustomer();
 
             // Create some test data to assign to the property
-            String TestData = "Some Street";
+            String TestData = "Jeff Street";
 
             // Assign the data to the property
             ACustomer.Address = TestData;
@@ -151,7 +151,7 @@ namespace Testing1
             clsCustomer ACustomer = new clsCustomer();
 
             // Create some test data to assign to the property
-            String TestData = "LE4 0QE";
+            String TestData = "LE40RT";
 
             // Assign the data to the property
             ACustomer.PostCode = TestData;
@@ -184,7 +184,7 @@ namespace Testing1
             // Boolean variable to store the results of the validation
             Boolean Found = false;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Test to see if the result is true
@@ -201,11 +201,11 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
-            if (ACustomer.CustomerID != 21)
+            if (ACustomer.CustomerID != 8)
             {
                 OK = false;
             }
@@ -223,11 +223,11 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
-            if (ACustomer.AccountCreationDate != Convert.ToDateTime("08/02/2021"))
+            if (ACustomer.AccountCreationDate != Convert.ToDateTime("05/02/2021"))
             {
                 OK = false;
             }
@@ -245,11 +245,11 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
-            if (ACustomer.FirstName != "First")
+            if (ACustomer.FirstName != "Jeff")
             {
                 OK = false;
             }
@@ -267,11 +267,11 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
-            if (ACustomer.Surname != "Surname")
+            if (ACustomer.Surname != "Jefferson")
             {
                 OK = false;
             }
@@ -289,7 +289,7 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
@@ -311,11 +311,11 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
-            if (ACustomer.Address != "Address here")
+            if (ACustomer.Address != "Jeff Street")
             {
                 OK = false;
             }
@@ -333,11 +333,11 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
-            if (ACustomer.PostCode != "LE12 4BP")
+            if (ACustomer.PostCode != "LE40RT")
             {
                 OK = false;
             }
@@ -355,11 +355,11 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
-            if (ACustomer.Email != "JoeBloggs@email.com")
+            if (ACustomer.Email != "Jeff@Jeff.com")
             {
                 OK = false;
             }
@@ -377,7 +377,7 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
@@ -399,11 +399,11 @@ namespace Testing1
             // Boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             // Create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 8;
             // Invoke the method
             Found = ACustomer.Find(CustomerID);
             // Check the address no
-            if (ACustomer.TotalSpent != 550)
+            if (ACustomer.TotalSpent != 4000)
             {
                 OK = false;
             }

@@ -159,20 +159,35 @@ namespace ClassLibrary
 
         public bool Find(int CustomerID)
         {
-            // Set the private data members to the test data value
-            mCustomerID = 21;
-            mFirstName = "First";
-            mSurname = "Surname";
-            mAccountCreationDate = Convert.ToDateTime("08/02/2021");
-            mAddressNo = 12;
-            mAddress = "Address here";
-            mPostCode = "LE12 4BP";
-            mEmail = "JoeBloggs@email.com";
-            mIsCustomer = true;
-            mTotalSpent = 550;
-
-            // Always return true
-            return true;
+            // Create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            // Add the parameter for the Customer ID to search for
+            DB.AddParameter("@CustomerID", CustomerID);
+            // Execute the stored procedure 
+            DB.Execute("sproc_tblCustomer_FilterByCustomerID");
+            // If one record is found (there should be either one or zero!)
+            if (DB.Count == 1)
+            {
+                // Copy the data from the database to the private data members
+                mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["Customer_ID"]);
+                mFirstName = Convert.ToString(DB.DataTable.Rows[0]["First_Name"]);
+                mSurname = Convert.ToString(DB.DataTable.Rows[0]["Surname"]);
+                mAddressNo = Convert.ToInt32(DB.DataTable.Rows[0]["AddressNo"]);
+                mAddress = Convert.ToString(DB.DataTable.Rows[0]["Address"]);
+                mPostCode = Convert.ToString(DB.DataTable.Rows[0]["PostCode"]);
+                mEmail = Convert.ToString(DB.DataTable.Rows[0]["Email"]);
+                mAccountCreationDate = Convert.ToDateTime(DB.DataTable.Rows[0]["Account_Creation_Date"]);
+                mIsCustomer = Convert.ToBoolean(DB.DataTable.Rows[0]["Is_Customer"]);
+                mTotalSpent = Convert.ToDecimal(DB.DataTable.Rows[0]["Total_Spent"]);
+                // Return that everything worked okay
+                return true;
+            }
+            // If no record was found 
+            else
+            {
+                // Return false indicating a problem
+                return false;
+            }
         }
     }
 }
