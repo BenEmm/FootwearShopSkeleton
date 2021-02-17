@@ -9,6 +9,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <hr />
+            <asp:Label ID="lblTitle" runat="server" Text="Our brands..." Font-Bold="False" Font-Names="Berlin Sans FB" Font-Size="XX-Large"></asp:Label>
+            <div>
+                
+            </div>
         </div>
     </form>
 </body>
