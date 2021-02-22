@@ -21,8 +21,8 @@ namespace ClassLibrary
         }
 
         // Private data member for the AccountCreationDate property
-         private DateTime mAccountCreationDate;
-         public DateTime AccountCreationDate
+        private DateTime mAccountCreationDate;
+        public DateTime AccountCreationDate
         {
             get
             {
@@ -188,6 +188,97 @@ namespace ClassLibrary
                 // Return false indicating a problem
                 return false;
             }
+        }
+
+        public string Valid(string First_Name, string Surname, string AddressNo, string Address, string Postcode, string Email, string Account_Creation_Date)
+        {
+            //create a string variable to store the error
+            String Error = "";
+            //create a temporary variable to store date values
+            DateTime DateTemp;
+            //if the HouseNo is blank
+            if (AddressNo.Length == 0)
+            {
+                //record the error
+                Error = Error + "The house no may not be blank : ";
+            }
+            //if the house no is greater than 6 characters
+            if (AddressNo.Length > 6)
+            {
+                //record the error
+                Error = Error + "The house no must be less than 6 characters : ";
+            }
+            try
+            {
+                //copy the dateAdded value to the DateTemp variable
+                DateTemp = Convert.ToDateTime(Account_Creation_Date);
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the past : ";
+                }
+                //check to see if the date is greater than today's date
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error = Error + "The date was not a valid date : ";
+            }
+            //is the post code blank
+            if (Postcode.Length == 0)
+            {
+                //record the error
+                Error = Error + "The post code may not be blank : ";
+            }
+            //if the post code is too long
+            if (Postcode.Length > 9)
+            {
+                //record the error
+                Error = Error + "The post code must be less than 9 characters : ";
+            }
+            //is the address blank
+            if (Address.Length == 0)
+            {
+                //record the error
+                Error = Error + "The address may not be blank : ";
+            }
+            //if the address is too long
+            if (Address.Length > 250)
+            {
+                //record the error
+                Error = Error + "The address must be less than 250 characters : ";
+            }
+            //is the first name blank
+            if (First_Name.Length == 0)
+            {
+                //record the error
+                Error = Error + "The firstname may not be blank : ";
+            }
+            //if the first name is too long
+            if (First_Name.Length > 30)
+            {
+                //record the error
+                Error = Error + "The firstname must be less than 30 characters : ";
+            }
+            //is the surname blank
+            if (Surname.Length == 0)
+            {
+                //record the error
+                Error = Error + "The surname may not be blank : ";
+            }
+            //if the surname is too long
+            if (Surname.Length > 50)
+            {
+                //record the error
+                Error = Error + "The surname must be less than 50 characters : ";
+            }
+            //return any error messages
+            return Error;
         }
     }
 }
