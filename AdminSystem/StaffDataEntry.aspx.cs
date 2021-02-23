@@ -17,24 +17,38 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create an instance of clsStaff
         clsStaff AStaff = new clsStaff();
-        //capture staffId
-        AStaff.StaffID = int.Parse(txtStaffID.Text);
-        //capture fullname
-        AStaff.FullName = txtFullName.Text;
-        //capture salary
-        AStaff.Salary = double.Parse(txtSalary.Text);
-        //capture date of leaving
-        AStaff.DateOfJoining = DateTime.Parse(txtDateOfJoining.Text);
-        //capture position
-        AStaff.Positon = txtPositon.Text;
-        //capture full time
-        AStaff.FullTime = chkFullTime.Checked;
-        //capture active
-        AStaff.Active = chkActive.Checked;
-        //store the staff in the session object
-        Session["AStaff"] = AStaff;
-        //nagivate to viewer page
-        Response.Redirect("StaffViewer.aspx");
+        string FullName = txtFullName.Text;
+        string Salary = txtSalary.Text;
+        string DateOfJoining = txtDateOfJoining.Text;
+        string Position = txtPositon.Text;
+        string Error = "";
+        Error = AStaff.Valid(FullName, Salary, DateOfJoining, Position);
+        if (Error == "")
+        {
+            //capture staffId
+            //AStaff.StaffID = int.Parse(txtStaffID.Text);
+            //capture fullname
+            AStaff.FullName = txtFullName.Text;
+            //capture salary
+            AStaff.Salary = double.Parse(txtSalary.Text);
+            //capture date of leaving
+            AStaff.DateOfJoining = DateTime.Parse(txtDateOfJoining.Text);
+            //capture position
+            AStaff.Positon = txtPositon.Text;
+            //capture full time
+            AStaff.FullTime = chkFullTime.Checked;
+            //capture active
+            AStaff.Active = chkActive.Checked;
+            //store the staff in the session object
+            Session["AStaff"] = AStaff;
+            //nagivate to viewer page
+            Response.Redirect("StaffViewer.aspx");
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
+        
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
