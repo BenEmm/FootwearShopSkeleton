@@ -97,14 +97,6 @@ namespace ClassLibrary
 
         public bool Find(int StaffID)
         {
-            // mStaffID = 21;
-            // mFullName = "Full Name";
-            // mSalary = 7.78;
-            // mDateOfLeaving = Convert.ToDateTime("16/09/2020");
-            // mPosition = "Weekend Staff";
-            // mFullTime = false;
-            //always return true
-            // return true;
 
             //create instance of the data connection
             clsDataConnection DB = new clsDataConnection();
@@ -130,6 +122,80 @@ namespace ClassLibrary
             {
                 return false;
             }
+        }
+        
+        public string Valid(string FullName, string Salary, string DateOfJoining, string Position)
+        {
+            String Error = "";
+            DateTime DateTemp;
+            Double SalaryTemp;
+
+            //is the fullname blank
+            if (FullName.Length == 0)
+            {
+                Error = Error + "The FullName may not be blank : ";
+            }
+
+            //is the fullname too long
+            if (FullName.Length > 50)
+            {
+                Error = Error + "The FullName must be less than 50 characters : ";
+            }
+
+            try
+            {
+                //try a type conversion on the original data
+                SalaryTemp = Convert.ToDouble(Salary);
+                //is salary < 0
+                if(SalaryTemp< 0)
+                {
+                    Error=Error + "The Salary cannot be less than 0";
+                }
+                //is the salary too high
+                if (SalaryTemp > 1000000.00)
+                {
+                    Error = Error + "The salary must be less than £1000000.00";
+                }
+            }
+            catch
+            {
+                Error = Error + "Salary is not valid : ";
+            }
+
+            try
+            {
+                //Copy the dateofjoinging value to the datetemp variable
+                DateTemp = Convert.ToDateTime(DateOfJoining);
+                //in the past
+                if(DateTemp < DateTime.Now.Date)
+                {
+                   Error = Error + "The date cannot be in the past : ";
+                }
+                //in the future
+                if (DateTemp> DateTime.Now.Date)
+                {
+                   Error = Error + "The date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error = Error + "The Date was not a valid date : ";
+            }
+
+            //is the position blank
+            if (Position.Length == 0)
+            {
+                Error = Error + "The Position may not be blank : ";
+            }
+
+            //is the position too long
+            if (Position.Length > 50)
+            {
+                Error = Error + "The Position must be less than 50 characters : ";
+            }
+
+            return Error;
         }
     }
 }
