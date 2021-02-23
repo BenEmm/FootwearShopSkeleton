@@ -1469,7 +1469,7 @@ namespace Testing1
 
             //test to see that the result is correct
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
