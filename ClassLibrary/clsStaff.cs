@@ -149,17 +149,17 @@ namespace ClassLibrary
                 //is salary < 0
                 if(SalaryTemp< 0)
                 {
-                    Error=Error + "The Salary cannot be less than 0";
+                    Error=Error + "The Salary cannot be less than 0 : ";
                 }
                 //is the salary too high
                 if (SalaryTemp > 1000000.00)
                 {
-                    Error = Error + "The salary must be less than £1000000.00";
+                    Error = Error + "The salary must be less than £1000000.00 : ";
                 }
             }
             catch
             {
-                Error = Error + "Salary is not valid : ";
+                Error = Error + "Salary is not valid salary: ";
             }
 
             try
