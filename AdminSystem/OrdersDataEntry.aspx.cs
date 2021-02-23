@@ -22,7 +22,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         AnOrder.Email = txtEmail.Text;
         AnOrder.TrackingNumber = txtTrackingNo.Text;
         AnOrder.TotalPrice = int.Parse(txtTotalPrice.Text);
-        AnOrder.Quantity = txtQuantity.Text;
+        AnOrder.Quantity = int.Parse(txtQuantity.Text);
         AnOrder.ShippingDate = DateTime.Parse(txtShippingDate.Text);
         AnOrder.OrderNumber = int.Parse(txtOrderNo.Text);
       
