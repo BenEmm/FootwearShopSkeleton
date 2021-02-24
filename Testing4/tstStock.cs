@@ -137,7 +137,7 @@ namespace Testing4
         {
             clsStock AStock = new clsStock();
             Boolean Found = false;
-            Int32 StockID = 21;
+            Int32 StockID = 1;
             Found = AStock.Find(StockID);
             Assert.IsTrue(Found);
         }
@@ -152,11 +152,11 @@ namespace Testing4
             //Boolean variable to record whether the data is ok (assumed it is)
             Boolean OK = true;
             //Create some test data to use with the method
-            Int32 StockID = 21;
+            Int32 StockID = 1;
             //Invoke the method
             Found = AStock.Find(StockID);
             //Check the Stock ID
-            if (AStock.StockID != 21)
+            if (AStock.StockID != 1)
             {
                 OK = false;
             }
@@ -172,9 +172,9 @@ namespace Testing4
             //Boolean variable to record whether the data is ok (assumed it is)
             Boolean OK = true;
             //Create some test data to use with the method 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
             Found = AStock.Find(StockID);
-            if(AStock.DateOrdered != Convert.ToDateTime("16/09/2020"))
+            if(AStock.DateOrdered != Convert.ToDateTime("01/01/2000"))
             {
                 OK = false;
             }
@@ -191,7 +191,7 @@ namespace Testing4
             //Boolean variable to record whether the data is ok (assumed it is)
             Boolean OK = true;
             //Create some test data to use with the method 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
             Found = AStock.Find(StockID);
             if (AStock.StockDescription != "Converse")
             {
@@ -209,9 +209,9 @@ namespace Testing4
             //Boolean variable to record whether the data is ok (assumed it is)
             Boolean OK = true;
             //Create some test data to use with the method 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
             Found = AStock.Find(StockID);
-            if (AStock.StockColour != "Black and White")
+            if (AStock.StockColour != "Red")
             {
                 OK = false;
             }
@@ -227,7 +227,7 @@ namespace Testing4
             //Boolean variable to record whether the data is ok (assumed it is)
             Boolean OK = true;
             //Create some test data to use with the method 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
             Found = AStock.Find(StockID);
             if (AStock.StockAmount != 200)
             {
@@ -245,9 +245,9 @@ namespace Testing4
             //Boolean variable to record whether the data is ok (assumed it is)
             Boolean OK = true;
             //Create some test data to use with the method 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
             Found = AStock.Find(StockID);
-            if (AStock.StockPrice != 39.99M)
+            if (AStock.StockPrice != 19.99M)
             {
                 OK = false;
             }
@@ -263,7 +263,7 @@ namespace Testing4
             //Boolean variable to record whether the data is ok (assumed it is)
             Boolean OK = true;
             //Create some test data to use with the method 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
             Found = AStock.Find(StockID);
             if (AStock.Available != true)
             {
