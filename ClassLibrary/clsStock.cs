@@ -99,16 +99,24 @@ namespace ClassLibrary
 
         public bool Find(int StockID)
         {
-            //Set the private data members to the test data value 
-            mStockID = 21;
-            mDateOrdered = Convert.ToDateTime("16/09/2020");
-            mStockDescription = ("Converse");
-            mStockColour = ("Black and White");
-            mStockAmount = 200;
-            mStockPrice = 39.99M;
-            mAvailable = true;
-            //return true
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@StockID", StockID);
+            DB.Execute("sproc_tblStock_FilterByStockID");
+            if(DB.Count == 1)
+            {
+                mStockID = Convert.ToInt32(DB.DataTable.Rows[0]["StockID"]);
+                mStockDescription = Convert.ToString(DB.DataTable.Rows[0]["StockDescription"]);
+                mStockColour = Convert.ToString(DB.DataTable.Rows[0]["StockColour"]);
+                mStockAmount = Convert.ToInt32(DB.DataTable.Rows[0]["StockAmount"]);
+                mStockPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["StockPrice"]);
+                mAvailable = Convert.ToBoolean(DB.DataTable.Rows[0]["Available"]);
+                mDateOrdered = Convert.ToDateTime(DB.DataTable.Rows[0]["DateOrdered"]);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
