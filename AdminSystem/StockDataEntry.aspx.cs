@@ -38,4 +38,23 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        clsStock AStock = new clsStock();
+        Int32 StockID;
+        Boolean Found = false;
+        StockID = Convert.ToInt32(txtStockID.Text);
+        Found = AStock.Find(StockID);
+        if(Found == true)
+        {
+            txtStockDescription.Text = AStock.StockDescription;
+            txtStockColour.Text = AStock.StockColour;
+            txtStockAmount.Text = AStock.StockAmount.ToString();
+            txtStockPrice.Text = AStock.StockPrice.ToString();
+            txtDateOrdered.Text = AStock.DateOrdered.ToString();
+            chkAvailable.Checked = AStock.Available;
+        }
+
+    }
 }
