@@ -98,7 +98,7 @@ namespace Testing5
         {
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
-            Int32 Id = 2;
+            Int32 Id = 3;
             Found = ABrand.Find(Id);
 
             Assert.IsTrue(Found);
@@ -110,9 +110,9 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 2;
+            Int32 Id = 3;
             Found = ABrand.Find(Id);
-            if (ABrand.BrandID != 2)
+            if (ABrand.BrandID != 3)
             {
                 OK = false;
             }
@@ -125,7 +125,7 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 2;
+            Int32 Id = 3;
             Found = ABrand.Find(Id);
             if (ABrand.BrandName != "Nike")
             {
@@ -140,7 +140,7 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 2;
+            Int32 Id = 3;
             Found = ABrand.Find(Id);
             if (ABrand.TopProduct != 2)
             {
@@ -155,7 +155,7 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 2;
+            Int32 Id = 3;
             Found = ABrand.Find(Id);
             if (ABrand.LatestProduct != 2)
             {
@@ -170,7 +170,7 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 2;
+            Int32 Id = 3;
             Found = ABrand.Find(Id);
             if (ABrand.LastRestock != Convert.ToDateTime("11/10/2020"))
             {
@@ -185,7 +185,7 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 2;
+            Int32 Id = 3;
             Found = ABrand.Find(Id);
             if (ABrand.AvgPrice != 0.00)
             {
@@ -200,7 +200,7 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 2;
+            Int32 Id = 3;
             Found = ABrand.Find(Id);
             if (ABrand.IsListed != true)
             {
