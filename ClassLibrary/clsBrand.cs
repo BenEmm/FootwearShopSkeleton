@@ -53,6 +53,7 @@ namespace ClassLibrary {
             connection.AddParameter("@BrandID", this.BrandID);
             connection.Execute("sproc_Brand_Delete");
         }
+
         public void AddToDatabase(clsBrand brand)  
         {
             // converts a DateTime variable to sql DATE format.
@@ -67,18 +68,30 @@ namespace ClassLibrary {
             connection.Execute("sproc_Brand_Add");
         }
 
+
         public bool Find(int brandId)
         {
-            BrandID = 2;
-            BrandName = "Nike";
-            TopProduct = 2;
-            LatestProduct = 2;
-            LastRestock = Convert.ToDateTime("11/10/2020");
-            AvgPrice = 0.00;
-            IsListed = true;
+            clsDataConnection connection = new clsDataConnection();
+            connection.AddParameter("@BrandID", brandId);
+            connection.Execute("sproc_FindByBrandID");
 
-            //always return true
-            return true;
+            // if a record exists in connection database
+            if (connection.Count == 1)
+            {
+                BrandID = Convert.ToInt32(connection.DataTable.Rows[0]["BrandID"]);
+                brandName = Convert.ToString(connection.DataTable.Rows[0]["BrandName"]);
+                topProduct = Convert.ToInt32(connection.DataTable.Rows[0]["TopProduct"]);
+                latestProduct = Convert.ToInt32(connection.DataTable.Rows[0]["LatestProduct"]);
+                lastRestock = Convert.ToDateTime(connection.DataTable.Rows[0]["LastRestock"]);
+                avgPrice = Convert.ToDouble(connection.DataTable.Rows[0]["AvgPrice"]);
+                isListed = Convert.ToBoolean(connection.DataTable.Rows[0]["IsListed"]);
+                return true;
+            }
+            else
+            {
+                // was not found.
+                return false;
+            }
         }
 
         public double calculateAvgPrice()  
