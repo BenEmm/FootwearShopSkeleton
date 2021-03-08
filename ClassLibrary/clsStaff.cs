@@ -103,7 +103,7 @@ namespace ClassLibrary
             //add the parameter for the staff id to search for 
             DB.AddParameter("@StaffID", StaffID);
             //execute stored procedure 
-            DB.Execute("sproc_tblStaff_FilterByStaffID");
+            DB.Execute("sproc_tblStaffdb_FilterByStaffID");
             //if one record is found 
             if (DB.Count == 1)
             {
