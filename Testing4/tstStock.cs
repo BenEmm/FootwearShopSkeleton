@@ -635,7 +635,7 @@ namespace Testing4
             //string varibale to store any error message
             String Error = "";
             //This test should fail
-            Int32 stockAmount = 1000000;
+            Int32 stockAmount = 100000;
             //change double to string
             string Stockamount = stockAmount.ToString();
             //invoke the method
