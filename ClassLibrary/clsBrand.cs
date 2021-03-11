@@ -13,7 +13,7 @@ namespace ClassLibrary {
         private double avgPrice;
         private bool isListed;
         
-        //public properties and getters/setters
+        //public properties & getters/setters
         public Int32 BrandID { get { return brandId; } private set { brandId = value; } } // cannot set this outside of class, the DB assigns the number, this class will fetch the num to be set here.
         public string BrandName { get { return brandName; } set { brandName = value; } }
         public int TopProduct { get { return topProduct; } set { topProduct = value; } }
@@ -54,21 +54,6 @@ namespace ClassLibrary {
             connection.Execute("sproc_Brand_Delete");
         }
 
-        public void AddToDatabase(clsBrand brand)  
-        {
-            // converts a DateTime variable to sql DATE format.
-            string sqlRestockDate = (brand.LastRestock.Year + brand.LastRestock.Month + brand.LastRestock.Day).ToString();
-            clsDataConnection connection = new clsDataConnection();
-            connection.AddParameter("@BrandName", brand.BrandName);
-            connection.AddParameter("@TopProduct", brand.TopProduct);
-            connection.AddParameter("@LatestProduct", brand.LatestProduct);
-            connection.AddParameter("@LastRestock ", sqlRestockDate);
-            connection.AddParameter("@AvgPrice", brand.AvgPrice);
-            connection.AddParameter("@IsListed", brand.IsListed);
-            connection.Execute("sproc_Brand_Add");
-        }
-
-
         public bool Find(int brandId)
         {
             clsDataConnection connection = new clsDataConnection();
@@ -94,11 +79,17 @@ namespace ClassLibrary {
             }
         }
 
+
+
+
+        // functionality needed
         public double calculateAvgPrice()  
         {
             return 0.00;
         }
+        
 
+        // may not use
         private int FindBrandID()
         {
             clsDataConnection connection = new clsDataConnection();
@@ -115,6 +106,20 @@ namespace ClassLibrary {
             clsBrand other = (clsBrand)obj;
 
             return this.BrandID == other.BrandID;
+        }
+
+        public void AddToDatabase(clsBrand brand)
+        {
+            // converts a DateTime variable to sql DATE format.
+            string sqlRestockDate = (brand.LastRestock.Year + brand.LastRestock.Month + brand.LastRestock.Day).ToString();
+            clsDataConnection connection = new clsDataConnection();
+            connection.AddParameter("@BrandName", brand.BrandName);
+            connection.AddParameter("@TopProduct", brand.TopProduct);
+            connection.AddParameter("@LatestProduct", brand.LatestProduct);
+            connection.AddParameter("@LastRestock ", sqlRestockDate);
+            connection.AddParameter("@AvgPrice", brand.AvgPrice);
+            connection.AddParameter("@IsListed", brand.IsListed);
+            connection.Execute("sproc_Brand_Add");
         }
 
     }
