@@ -8,8 +8,6 @@ using System.Web.UI.WebControls;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
-    // private DateTime date;
-    private bool listed = false;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,18 +26,18 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        /*
-        DateTime date = cdrRestock.SelectedDate;
-        int day = date.Day;
-        int month = date.Month;
-        int year = date.Year;
-        string name = tbName.Text;
-        int topProduct = Convert.ToInt32(dropTop.SelectedValue);
-        int latestProduct = Convert.ToInt32(dropLatest.SelectedValue);
-        bool listBrandIsChecked = cbList.Checked;
-        clsBrand brand = new clsBrand(name, topProduct, latestProduct, new DateTime(year, month, day), listBrandIsChecked); */
         clsBrand Brand = new clsBrand();
+
+        // BrandID set by database (maybe)
+
         Brand.BrandName = tbName.Text;
+        Brand.TopProduct = int.Parse(dropTop.SelectedValue);
+        Brand.LatestProduct = int.Parse(dropLatest.SelectedValue);
+        Brand.LastRestock = cdrRestock.SelectedDate;
+        Brand.IsListed = cbList.Checked;
+
+        // avgPrice property needs to be calculated from a mean of a brand's products
+
         //store Brand in session object
         Session["Brand"] = Brand;
         Response.Redirect("BrandsViewer.aspx");
@@ -47,12 +45,55 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void cdrRestock_SelectionChanged(object sender, EventArgs e)
     {
-        // date = cdrRestock.SelectedDate;
+        
     }
 
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
 
+    }
+
+    protected void btnShowCalendar_click(object sender, EventArgs e)
+    {
+        cdrRestock.Visible = true;
+    }
+
+    protected void btnFind_Click(object sender, EventArgs e) 
+    {
+        clsBrand brand = new clsBrand();
+        // variable to store PK
+        Int32 BrandId;
+        // var to store return value of Find()
+        Boolean Found = false;
+
+        //Get PK from user input as Int32 obj
+        try
+        {
+            BrandId = Convert.ToInt32(tbBrandID.Text);
+            Found = brand.Find(BrandId);
+        }
+        catch (Exception)
+        {
+            lblErrorAlert.Text = "Invalid Brand ID: This field must be a positive integer.";
+            return;
+        }
+
+        if (Found)
+        {
+            // set the properties of the found brand to appear in the data form
+            tbName.Text = brand.BrandName;
+            dropTop.SelectedValue = brand.TopProduct.ToString();
+            dropLatest.SelectedValue = brand.LatestProduct.ToString();
+            cdrRestock.SelectedDate = brand.LastRestock;
+            cdrRestock.Visible = true;
+            lblSelectedDate.Text = brand.LastRestock.ToString("dd/MM/yyyy");
+            cbList.Checked = brand.IsListed;
+            lblErrorAlert.Text = "";
+        }
+        else
+        {
+            lblErrorAlert.Text = "Brand " + tbName.Text + " was not found in the database.";
+        }
     }
 }
