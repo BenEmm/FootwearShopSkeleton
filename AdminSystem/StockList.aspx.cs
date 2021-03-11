@@ -31,4 +31,34 @@ public partial class _Default : System.Web.UI.Page
         //bind the data to the list
         lstStockList.DataBind();
     }
+
+    //event handler for the add button
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        //store -1 into the session object to indicate this is a new session record 
+        Session["StockID"] = -1;
+        //redirect to the data entry page
+        Response.Redirect("StockDataEntry.aspx");
+    }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        //variable to store the primary key value of the record to be edited 
+        Int32 StockID;
+        //if a record has been selected from the list
+        if(lstStockList.SelectedIndex != -1)
+        {
+            //get the primary key value of the record to edit
+            StockID = Convert.ToInt32(lstStockList.SelectedValue);
+            //store the data in the session object
+            Session["StockID"] = StockID;
+            //redirect to the edit page
+            Response.Redirect("StockDataEntry.aspx");
+        }
+        else //if no record has been selected
+        {
+            //display an error
+            lblError.Text = "Please select a record to delete from the list";
+        }
+    }
 }

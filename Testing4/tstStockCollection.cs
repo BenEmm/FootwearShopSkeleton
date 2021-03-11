@@ -91,6 +91,77 @@ namespace Testing4
             //test to see that the two values are the same
             Assert.AreEqual(AllStock.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            //create an instance of the class we want to create 
+            clsStockCollection AllStock = new clsStockCollection();
+            //create the item of test data
+            clsStock TestItem = new clsStock();
+            //var to store the primary key
+            Int32 PrimaryKey = 0;
+            //Set its properties
+            TestItem.Available = true;
+            TestItem.StockID = 1;
+            TestItem.StockDescription = "Converse";
+            TestItem.StockColour = "Red";
+            TestItem.StockAmount = 300;
+            TestItem.StockPrice = 20.00M;
+            TestItem.DateOrdered = DateTime.Now.Date;
+            //set this stock to the test data
+            AllStock.ThisStock = TestItem;
+            //add the record
+            PrimaryKey = AllStock.Add();
+            //set the primary key of the test data
+            TestItem.StockID = PrimaryKey;
+            //find the record
+            AllStock.ThisStock.Find(PrimaryKey);
+            //test to see that the two values are the same 
+            Assert.AreEqual(AllStock.ThisStock, TestItem);
+
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            //create an instance of the class we want to create 
+            clsStockCollection AllStock = new clsStockCollection();
+            //create the item of test data
+            clsStock TestItem = new clsStock();
+            //var to store the primary key
+            Int32 PrimaryKey = 0;
+            //Set its properties
+            TestItem.Available = true;
+            TestItem.StockID = 1;
+            TestItem.StockDescription = "Converse";
+            TestItem.StockColour = "Red";
+            TestItem.StockAmount = 300;
+            TestItem.StockPrice = 20.00M;
+            TestItem.DateOrdered = DateTime.Now.Date;
+            //set this stock to the test data
+            AllStock.ThisStock = TestItem;
+            //add the record
+            PrimaryKey = AllStock.Add();
+            //set the primary key of the test data
+            TestItem.StockID = PrimaryKey;
+            //modify the test data
+            TestItem.Available = false;
+            TestItem.StockID = 3;
+            TestItem.StockDescription = "AirMax";
+            TestItem.StockColour = "Yellow";
+            TestItem.StockAmount = 15;
+            TestItem.StockPrice = 40.00M;
+            TestItem.DateOrdered = DateTime.Now.Date;
+            //set the record based on the new test data
+            AllStock.ThisStock = TestItem;
+            //update the record 
+            AllStock.Update();
+            //find the record
+            AllStock.ThisStock.Find(PrimaryKey);
+            //test to see thisAddress matches testdata
+            Assert.AreEqual(AllStock.ThisStock, TestItem);
+        }
     }
 
     
