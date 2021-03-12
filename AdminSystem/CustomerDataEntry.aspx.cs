@@ -59,10 +59,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //Captures the total a customer has spent
             ACustomer.TotalSpent = decimal.Parse(txtTotalSpent.Text);
             // ----------------------------------------------------------------- //
-            // Stores all the captured data in the session object
-            Session["ACustomer"] = ACustomer;
-            // Navigates to the CustomerViewer page
-            Response.Redirect("CustomerViewer.aspx");
+            // Create a new instance of the customer collection
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
+            // Set the ThisCustomer property
+            CustomerList.ThisCustomer = ACustomer;
+            // Add the new record
+            CustomerList.Add();
+            // Redirect back to the listpage
+            Response.Redirect("CustomerList.aspx");
         }
         else
         {

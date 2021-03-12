@@ -125,5 +125,37 @@ namespace Testing1
             // Test to see that the two values are the same
             Assert.AreEqual(AllCustomers.Count, 2);
         }*/
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            //create an instance of the class we want to create 
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            //create the item of test data
+            clsCustomer TestItem = new clsCustomer();
+            //var to store the primary key
+            Int32 PrimaryKey = 0;
+            //Set its properties
+            TestItem.IsCustomer = true;
+            TestItem.CustomerID = 1;
+            TestItem.FirstName = "Jeff";
+            TestItem.Surname = "Jefferson";
+            TestItem.AddressNo = 12;
+            TestItem.Address = "Jeff Street";
+            TestItem.PostCode = "LE40RT";
+            TestItem.Email = "Jeff@Jeff.com";
+            TestItem.AccountCreationDate = DateTime.Now.Date;
+            TestItem.TotalSpent = 4000;
+            //set this stock to the test data
+            AllCustomers.ThisCustomer = TestItem;
+            //add the record
+            PrimaryKey = AllCustomers.Add();
+            //set the primary key of the test data
+            TestItem.CustomerID = PrimaryKey;
+            //find the record
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            //test to see that the two values are the same 
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
+        }
     }
 }
