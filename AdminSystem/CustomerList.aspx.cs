@@ -37,4 +37,13 @@ public partial class _Default : System.Web.UI.Page
     {
 
     }
+
+    // Event handler for the add button
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        // Store -1 into the session object to indicate this is a new record
+        Session["Customer_ID"] = -1;
+        // Redirect to the data entry page
+        Response.Redirect("CustomerDataEntry.aspx");
+    }
 }
