@@ -162,6 +162,39 @@ namespace Testing4
             //test to see thisAddress matches testdata
             Assert.AreEqual(AllStock.ThisStock, TestItem);
         }
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            //create an instance of the class we want to create 
+            clsStockCollection AllStock = new clsStockCollection();
+            //create the item of test data
+            clsStock TestItem = new clsStock();
+            //var to store the primary key
+            Int32 PrimaryKey = 0;
+            //Set its properties
+            TestItem.Available = true;
+            TestItem.StockID = 1;
+            TestItem.StockDescription = "Converse";
+            TestItem.StockColour = "Red";
+            TestItem.StockAmount = 300;
+            TestItem.StockPrice = 20.00M;
+            TestItem.DateOrdered = DateTime.Now.Date;
+            //set this stock to the test data
+            AllStock.ThisStock = TestItem;
+            //add the record
+            PrimaryKey = AllStock.Add();
+            //set the primary key of the test data
+            TestItem.StockID = PrimaryKey;
+            //find the record
+            AllStock.ThisStock.Find(PrimaryKey);
+            //delete the record
+            AllStock.Delete();
+            //now find the record
+            Boolean Found = AllStock.ThisStock.Find(PrimaryKey);
+            //test to see that the record was not found 
+            Assert.IsFalse(Found);
+        }
     }
 
     
