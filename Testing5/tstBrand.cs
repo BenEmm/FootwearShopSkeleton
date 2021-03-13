@@ -11,6 +11,14 @@ namespace Testing5
         // create an instance of class Brand for this scope.
         clsBrand brand = new clsBrand("Nike", 2, 2, new System.DateTime(2020, 10, 11), true);
 
+        // test data
+        string BrandName = "Sketchers";
+        string TopProduct = "Light-Ups";
+        string LatestProduct = "Sketchers Runners";
+        string LastRestock = DateTime.Today.ToString();
+        // isListed ignored
+        // avgPrice is calculated and not validated.
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -207,6 +215,269 @@ namespace Testing5
                 OK = false;
             }
             Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestValidMethod()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+            ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, LastRestock);
+        }
+
+
+        // brand name tests
+        // name : string 50 not null
+        // topproduct : int not null
+        // latestprod : int not null
+        // lastrestock : date
+
+        [TestMethod]
+        public void TestValidBrandNameMinLessOne()
+        {
+            clsBrand brand = new clsBrand();
+            String ErrorMsg = "";
+
+            // invoke Valid() with 1 character for BrandName
+            ErrorMsg = brand.Valid("", TopProduct, LatestProduct, LastRestock);
+
+            // Check the error message matches expected result (error)
+            Assert.AreEqual(ErrorMsg, "You must enter a brand name.\n");
+
+        }
+
+        [TestMethod]
+        public void TestValidBrandNameMin()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+            // invoke Valid() with 1 character for BrandName
+            string min = "a";
+            ErrorMsg = brand.Valid(min, TopProduct, LatestProduct, LastRestock);
+
+            // Check the error message matches expected result (no error)
+            Assert.AreEqual(ErrorMsg, "");
+        }
+
+        [TestMethod]
+        public void TestValidBrandNameMinPlusOne()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+            // invoke Valid() with 1 character for BrandName
+            string minPlusOne = "ab";
+            ErrorMsg = brand.Valid(minPlusOne, TopProduct, LatestProduct, LastRestock);
+
+            // Check the error message matches expected result (no error)
+            Assert.AreEqual(ErrorMsg, "");
+        }
+
+        [TestMethod]
+        public void TestValidBrandNameMaxLessOne()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+            // invoke Valid() with 1 character for BrandName
+            string maxLessOne = "heres a str that should be exactly 49 characters.";
+            ErrorMsg = brand.Valid(maxLessOne, TopProduct, LatestProduct, LastRestock);
+
+            // Check the error message matches expected result (no error)
+            Assert.AreEqual(ErrorMsg, "");
+        }
+
+        [TestMethod]
+        public void TestValidBrandNameMax()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+            // invoke Valid() with 1 character for BrandName
+            string max = "heres a str that should be exactly 50 characters..";
+            ErrorMsg = brand.Valid(max, TopProduct, LatestProduct, LastRestock);
+
+            // Check the error message matches expected result (no error)
+            Assert.AreEqual(ErrorMsg, "");
+        }
+
+        [TestMethod]
+        public void TestValidBrandNameMid()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+            // invoke Valid() with 1 character for BrandName
+            string mid = "this one is 25 chars(mid)";
+            ErrorMsg = brand.Valid(mid, TopProduct, LatestProduct, LastRestock);
+
+            // Check the error message matches expected result (no error)
+            Assert.AreEqual(ErrorMsg, "");
+        }
+
+        [TestMethod]
+        public void TestValidBrandNameMaxAddOne()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+            // invoke Valid() with 1 character for BrandName
+            string maxAddOne = "heres a str that should be exactly 51 characters...";
+            ErrorMsg = brand.Valid(maxAddOne, TopProduct, LatestProduct, LastRestock);
+
+            // Check the error message matches expected result (no error)
+            Assert.AreEqual(ErrorMsg, "Your brand name is too long. Must be fewer than 50 characters long.\n");
+        }
+
+        [TestMethod]
+        public void TestValidBrandNameExtremeMax()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+
+            // invoke Valid() with 1 character for BrandName
+            string extremeMax = "Extreme Max String (200) Extreme Max String (200) Extreme Max String (200) " +
+                "Extreme Max String (200) Extreme Max String (200) Extreme Max String (200) Extreme Max String (200) " +
+                "Extreme Max String (200) ";
+
+            ErrorMsg = brand.Valid(extremeMax, TopProduct, LatestProduct, LastRestock);
+
+            // Check the error message matches expected result (no error)
+            Assert.AreEqual(ErrorMsg, "Your brand name is too long. Must be fewer than 50 characters long.\n");
+        }
+
+
+
+
+        // test last restock date
+        [TestMethod]
+        public void TestValidLastRestockExtremeMin()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+            DateTime TestDate = DateTime.Today.AddYears(-50);
+
+            string ExtremeMin = TestDate.ToString();
+
+            ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, ExtremeMin);
+
+            Assert.AreEqual(ErrorMsg, "Please enter a more recent date (after 31-12-2000).\n");
+        }
+
+
+        [TestMethod]
+        public void TestValidLastRestockMinLessOne()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+            string MinMinusOne = "30/12/2000";
+
+            ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, MinMinusOne);
+
+            Assert.AreEqual(ErrorMsg, "Please enter a more recent date (after 31-12-2000).\n");
+        }
+
+        [TestMethod]
+        public void TestValidLastRestockMin()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+            string Min = "31/12/2000";
+
+            ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, Min);
+            // should accept min value
+            Assert.AreEqual(ErrorMsg, "");
+        }
+
+
+        [TestMethod]
+        public void TestValidLastRestockMinPlusOne()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+            string MinPlusOne = "01/01/2001";
+
+            ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, MinPlusOne);
+
+            Assert.AreEqual(ErrorMsg, "");
+        }
+
+        [TestMethod]
+        public void TestValidLastRestockMaxLessOne()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+            DateTime TestDate = DateTime.Today.AddDays(-1); // yesterday
+
+            string MaxLessOne = TestDate.ToString();
+
+            ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, MaxLessOne);
+            // no error msg
+            Assert.AreEqual(ErrorMsg, "");
+        }
+
+        [TestMethod]
+        public void TestValidLastRestockMax()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+            DateTime TestDate = DateTime.Today; // today
+
+            string Max = TestDate.ToString();
+
+            ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, Max);
+            // no error msg
+            Assert.AreEqual(ErrorMsg, "");
+        }
+
+        [TestMethod]
+        public void TestValidLastRestockMaxPlusOne()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+            DateTime TestDate = DateTime.Today.AddDays(1); // tomorrow
+
+            string MaxPlusOne = TestDate.ToString();
+
+            ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, MaxPlusOne);
+            // Error message expected
+            Assert.AreEqual(ErrorMsg, "Date cannot be in the future.\n");
+        }
+
+
+        [TestMethod]
+        public void TestValidLastRestockExtremeMax()
+        {
+            clsBrand brand = new clsBrand();
+
+            String ErrorMsg = "";
+
+            DateTime TestDate = DateTime.Today.AddYears(50); // extreme test data
+
+            string ExtremeMax = TestDate.ToString();
+
+            ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, ExtremeMax);
+            // Error message expected
+            Assert.AreEqual(ErrorMsg, "Date cannot be in the future.\n");
         }
     }
 }
