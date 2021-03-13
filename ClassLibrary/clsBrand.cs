@@ -79,7 +79,42 @@ namespace ClassLibrary {
             }
         }
 
+        public string Valid(string brandName, string topProduct, string latestProduct, string lastRestock)
+        {
+            String ErrorMsg = "";
 
+            if (brandName.Length == 0)
+            {
+                ErrorMsg += "You must enter a brand name.\n";
+            }
+            else if (brandName.Length > 50)
+            {
+                ErrorMsg += "Your brand name is too long. Must be fewer than 50 characters long.\n";
+            }
+            else if (topProduct == "")
+            {
+                ErrorMsg += "You must select a top product.\n";
+            }
+            else if (latestProduct == "")
+            {
+                ErrorMsg += "You must select a latest product.\n";
+            }
+            else if (lastRestock == "")
+            {
+                ErrorMsg += "Please select a date\n";
+            }
+            else if (Convert.ToDateTime(lastRestock) < Convert.ToDateTime("31/12/2000"))
+            {
+                // shouldnt accept a date in the far past (sql min date = 1753)
+                ErrorMsg += "Please enter a more recent date (after 31-12-2000).\n";
+            }
+            else if (Convert.ToDateTime(lastRestock) > DateTime.Now.Date)
+            {
+                ErrorMsg += "Date cannot be in the future.\n";
+            }
+            
+            return ErrorMsg;
+        }
 
 
         // functionality needed
@@ -122,6 +157,7 @@ namespace ClassLibrary {
             connection.Execute("sproc_Brand_Add");
         }
 
+        
     }
 
 }
