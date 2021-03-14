@@ -12,16 +12,24 @@ namespace ClassLibrary
 
         public clsStockCollection()
         {
-            //var for the index
-            Int32 Index = 0;
-            //var  to store the record count
-            Int32 RecordCount = 0;
             //object for data connection
             clsDataConnection DB = new clsDataConnection();
             //execute the stored procedure
             DB.Execute("sproc_tblStock_SelectAll");
-            //get the count of the records
+            //populate the array list with the data table
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            //var for the index
+            Int32 Index = 0;
+            //var  to store the record count
+            Int32 RecordCount = 0;
+            //get the count of records
             RecordCount = DB.Count;
+            //clear the private array list 
+            mStockList = new List<clsStock>();
             //while there are records to process
             while (Index < RecordCount)
             {
@@ -127,6 +135,20 @@ namespace ClassLibrary
             DB.AddParameter("@StockID", mThisStock.StockID);
             //execute the stored procedure
             DB.Execute("sproc_tblStock_Delete");
+        }
+
+        public void FilterByStockDescription(string StockDescription)
+        {
+            //filters the stock descriptions based on a full or partial stock description
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //send the description parameter to the database
+            DB.AddParameter("@StockDescription", StockDescription);
+            //execute the stored procedure
+            DB.Execute("sproc_tblStock_FilterByStockDescription");
+            //populate the array list with the data table
+            PopulateArray(DB);
+
         }
     }
 }

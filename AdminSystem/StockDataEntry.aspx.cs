@@ -129,4 +129,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
 
     }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        //redirect back to the list page
+        Response.Redirect("StockList.aspx");
+    }
 }

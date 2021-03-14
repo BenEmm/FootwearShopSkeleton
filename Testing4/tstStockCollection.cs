@@ -195,6 +195,62 @@ namespace Testing4
             //test to see that the record was not found 
             Assert.IsFalse(Found);
         }
+
+        [TestMethod]
+
+        public void FilterByStockDescriptionOK()
+        {
+            //create an instance of the class containing unfiltered results
+            clsStockCollection AllStock = new clsStockCollection();
+            //create an instance of the filtered data
+            clsStockCollection FilteredStockDescription = new clsStockCollection();
+            //apply a blank string (should return all records)
+            FilteredStockDescription.FilterByStockDescription("");
+            //test to see that the values are the same 
+            Assert.AreEqual(AllStock.Count, FilteredStockDescription.Count);
+        }
+
+        [TestMethod]
+        public void FilterByStockDescriptionNoneFound()
+        {
+            //create an instance of the filtered data
+            clsStockCollection FilteredStockDescription = new clsStockCollection();
+            //apply a stock description that doesn't exit
+            FilteredStockDescription.FilterByStockDescription("blaaa");
+            //test to see that there are no records
+            Assert.AreEqual(0, FilteredStockDescription.Count);
+        }
+
+        [TestMethod]
+        public void FilterByStockDescriptionTestDataFound()
+        {
+            //create an instance of the filtered data
+            clsStockCollection FilteredStockDescription = new clsStockCollection();
+            //var to store the outcome
+            Boolean OK = true;
+            //apply a description that exists
+            FilteredStockDescription.FilterByStockDescription("Converse");
+            //check that the correct number of records are found
+            if(FilteredStockDescription.Count == 2)
+            {
+                //check that the firt record ID is 1031
+                if(FilteredStockDescription.StockList[0].StockID != 1031)
+                {
+                    OK = false;
+                }
+                //check that the second record ID is 1040
+                if(FilteredStockDescription.StockList[1].StockID != 1040)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            //test to see that there are no records
+            Assert.IsTrue(OK);
+        }
     }
 
     
