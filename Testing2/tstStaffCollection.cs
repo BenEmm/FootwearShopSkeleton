@@ -92,5 +92,73 @@ namespace Testing2
             Assert.AreEqual(AllStaff.Count, TestList.Count);
         }
 
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            //create the item of the test data
+            clsStaff TestItem = new clsStaff();
+            //var to store the primary key 
+            Int32 PrimaryKey = 0;
+            //set its properties
+            TestItem.StaffID = 123;
+            TestItem.FullName = "Full Name";
+            TestItem.Salary = 7.78;
+            TestItem.DateOfJoining = DateTime.Now.Date;
+            TestItem.Positon = "staff";
+            TestItem.FullTime = true;
+            TestItem.Active = true;
+            //set thisStaff to the test data
+            AllStaff.ThisStaff = TestItem;
+            //add the record
+            PrimaryKey = AllStaff.Add();
+            //set the primary key of the test data
+            TestItem.StaffID = PrimaryKey;
+            //find the record
+            AllStaff.ThisStaff.Find(PrimaryKey);
+            //test to see that the values are the same
+            Assert.AreEqual(AllStaff.ThisStaff, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            //create th eitem of test data
+            clsStaff TestItem = new clsStaff();
+            //var to store the primary key 
+            Int32 Primarykey = 0;
+            //set its properties
+            TestItem.FullName = "Name One";
+            TestItem.Salary = 7.78;
+            TestItem.DateOfJoining = DateTime.Now.Date;
+            TestItem.Positon = "staff type 1";
+            TestItem.FullTime = true;
+            TestItem.Active = true;
+            //set thisStaff to the test data
+            AllStaff.ThisStaff = TestItem;
+            //add the record
+            Primarykey = AllStaff.Add();
+            //set the primary key of the test data
+            TestItem.StaffID = Primarykey;
+            //modify the test data
+            TestItem.FullName = "Name two";
+            TestItem.Salary = 7.78;
+            TestItem.DateOfJoining = DateTime.Now.Date;
+            TestItem.Positon = "staff type 2";
+            TestItem.FullTime = false;
+            TestItem.Active = false;
+            //set the record based on the new test data
+            AllStaff.ThisStaff = TestItem;
+            //update the record
+            AllStaff.Update();
+            //find the record
+            AllStaff.ThisStaff.Find(Primarykey);
+            //test to see t=if they match
+            Assert.AreEqual(AllStaff.ThisStaff, TestItem);
+        }
+
     }
 }
