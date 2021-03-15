@@ -5,7 +5,7 @@ namespace ClassLibrary
 {
     public class clsStaffCollection
     {
-        public List<clsStaff> mStaffList = new List<clsStaff>();
+        private List<clsStaff> mStaffList = new List<clsStaff>();
         //constructor for the class
         public clsStaffCollection()
         {
@@ -64,10 +64,53 @@ namespace ClassLibrary
 
             }
         }
-        public clsStaff ThisStaff { get; set; }
-       
+        private clsStaff mThisStaff = new clsStaff();
+        public clsStaff ThisStaff
+        {
+            get
+            {
+                //return the private data
+                return mThisStaff;
+            }
+            set
+            {
+                //set private data
+                mThisStaff = value;
+            }
+        }
 
-        
 
+        public int Add()
+        {
+            //adds a new record to the database based on the values of mthisstaff
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //set the parameters for the stored procedure 
+            DB.AddParameter("@FullName", mThisStaff.FullName);
+            DB.AddParameter("@Salary", mThisStaff.Salary);
+            DB.AddParameter("@DateOfJoining", mThisStaff.DateOfJoining);
+            DB.AddParameter("@Position", mThisStaff.Positon);
+            DB.AddParameter("@FullTime", mThisStaff.FullTime);
+            DB.AddParameter("@Active", mThisStaff.Active);
+            //execute query returning the primary key 
+            return DB.Execute("sproc_tblStaffdb_Insert");
+        }
+
+        public void Update()
+        {
+            //update an existing record based on the values of thisStaff
+            //connect to database
+            clsDataConnection DB = new clsDataConnection();
+            //set the parameters for the stored procedure
+            DB.AddParameter("@StaffID", mThisStaff.StaffID);
+            DB.AddParameter("@FullName", mThisStaff.FullName);
+            DB.AddParameter("@Salary", mThisStaff.Salary);
+            DB.AddParameter("@DateOfJoining", mThisStaff.DateOfJoining);
+            DB.AddParameter("@Position", mThisStaff.Positon);
+            DB.AddParameter("@FullTime", mThisStaff.FullTime);
+            DB.AddParameter("@Active", mThisStaff.Active);
+            //execute stored procedure
+            DB.Execute("sproc_tblStaffdb_Update");
+        }
     }
 }

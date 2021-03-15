@@ -8,9 +8,36 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    //variablle to store the primary key with page level scope
+    Int32 StaffID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        //get the number of the adress to be processed
+        StaffID = Convert.ToInt32(Session["StaffID"]);
+        if (IsPostBack == false)
+        {
+            //if this is not a new record
+            if(StaffID != -1)
+            {
+                DisplayStaff();
+            }
+        }
+    }
 
+    private void DisplayStaff()
+    {
+        //create an instance of the staff collection
+        clsStaffCollection AllStaff = new clsStaffCollection();
+        //find the record to update 
+        AllStaff.ThisStaff.Find(StaffID);
+        //display the data for this record
+        txtStaffID.Text = AllStaff.ThisStaff.StaffID.ToString();
+        txtFullName.Text = AllStaff.ThisStaff.FullName;
+        txtSalary.Text = AllStaff.ThisStaff.Salary.ToString();
+        txtDateOfJoining.Text = AllStaff.ThisStaff.DateOfJoining.ToString();
+        txtPositon.Text = AllStaff.ThisStaff.Positon;
+        chkFullTime.Checked = AllStaff.ThisStaff.FullTime;
+        chkActive.Checked = AllStaff.ThisStaff.Active;
     }
 
     protected void btnOK_Click1(object sender, EventArgs e)
@@ -25,8 +52,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Error = AStaff.Valid(FullName, Salary, DateOfJoining, Position);
         if (Error == "")
         {
-            //capture staffId
-            //AStaff.StaffID = int.Parse(txtStaffID.Text);
+            //capture the staffid
+            AStaff.StaffID = StaffID;
             //capture fullname
             AStaff.FullName = txtFullName.Text;
             //capture salary
@@ -40,9 +67,31 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //capture active
             AStaff.Active = chkActive.Checked;
             //store the staff in the session object
-            Session["AStaff"] = AStaff;
+            //Session["AStaff"] = AStaff;
             //nagivate to viewer page
-            Response.Redirect("StaffViewer.aspx");
+            //Response.Redirect("StaffViewer.aspx");
+            //create a new instance of the staf collection
+            clsStaffCollection StaffList = new clsStaffCollection();
+            //if this is a new record
+            if (StaffID == -1)
+            {
+                //set the ThisSTaff property
+                StaffList.ThisStaff = AStaff;
+                //add the new record
+                StaffList.Add();
+            }
+            //otherwise it must be an update
+            else
+            {
+                //find the record to update
+                StaffList.ThisStaff.Find(StaffID);
+                //set thisstaff property
+                StaffList.ThisStaff = AStaff;
+                //update the record
+                StaffList.Update();
+            }
+            //redirect back to the listpage
+            Response.Redirect("StaffList.aspx");
         }
         else
         {
@@ -73,5 +122,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             chkFullTime.Checked = AStaff.FullTime;
             chkActive.Checked = AStaff.Active;
         }
+
+       
     }
 }
