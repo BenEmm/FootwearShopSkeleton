@@ -7,10 +7,39 @@ using System.Web.UI.WebControls;
 using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
-{
+{   // variable to store the primary key with page level scope
+     Int32 CustomerID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        // get the number of the customer to be processsed
+        CustomerID = Convert.ToInt32(Session["Customer_ID"]);
+        if (IsPostBack == false)
+        {
+            // if this is not a new record
+            if (CustomerID != -1)
+            {
+                // Display the current data for the record
+                DisplayCustomer(); 
+            }
+        }
+    }
 
+    void DisplayCustomer()
+    {
+        // create an instance of the customer list
+        clsCustomerCollection CustomerList = new clsCustomerCollection();
+        // find the record to update
+        CustomerList.ThisCustomer.Find(CustomerID);
+        // Display the data for this record
+        txtCustomerID.Text = CustomerList.ThisCustomer.CustomerID.ToString();
+        txtFirstName.Text = CustomerList.ThisCustomer.FirstName;
+        txtSurname.Text = CustomerList.ThisCustomer.Surname;
+        txtAddressNo.Text = CustomerList.ThisCustomer.AddressNo.ToString();
+        txtAddress.Text = CustomerList.ThisCustomer.Address;
+        txtPostcode.Text = CustomerList.ThisCustomer.PostCode;
+        txtEmail.Text = CustomerList.ThisCustomer.Email;
+        txtDate.Text = CustomerList.ThisCustomer.AccountCreationDate.ToString();
+        txtTotalSpent.Text = CustomerList.ThisCustomer.TotalSpent.ToString();
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -33,27 +62,27 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string AccountCreationDate = txtDate.Text;
         // variable to store any error messages
         string Error = "";
-        
+
         // Validate the data
         Error = ACustomer.Valid(First_Name, Surname, AddressNo, Address, Postcode, Email, AccountCreationDate);
         if (Error == "")
         {
             // Captures the customerID
-            ACustomer.CustomerID = int.Parse(txtCustomerID.Text);
+            ACustomer.CustomerID = CustomerID;
             // Captures the First Name
-            ACustomer.FirstName = txtFirstName.Text;
+            ACustomer.FirstName = First_Name;
             // Captures the Surname
-            ACustomer.Surname = txtSurname.Text;
+            ACustomer.Surname = Surname;
             // Capture the house number
-            ACustomer.AddressNo = int.Parse(txtAddressNo.Text);
+            ACustomer.AddressNo = int.Parse(AddressNo);
             // Captures the Address
-            ACustomer.Address = txtAddress.Text;
+            ACustomer.Address = Address;
             // Captures the Postcode
-            ACustomer.PostCode = txtPostcode.Text;
+            ACustomer.PostCode = Postcode;
             // Captures the Email
-            ACustomer.Email = txtEmail.Text;
+            ACustomer.Email = Email;
             // Captures the Account Creation Date 
-            ACustomer.AccountCreationDate = DateTime.Parse(txtDate.Text);
+            ACustomer.AccountCreationDate = DateTime.Parse(AccountCreationDate);
             // Captures whether the person is a customer or not
             ACustomer.IsCustomer = chkConfirm.Checked;
             //Captures the total a customer has spent
@@ -61,16 +90,31 @@ public partial class _1_DataEntry : System.Web.UI.Page
             // ----------------------------------------------------------------- //
             // Create a new instance of the customer collection
             clsCustomerCollection CustomerList = new clsCustomerCollection();
-            // Set the ThisCustomer property
-            CustomerList.ThisCustomer = ACustomer;
-            // Add the new record
-            CustomerList.Add();
-            // Redirect back to the listpage
+            
+            // if this is a new record i.e CustomerID = -1 then add the data
+            if (CustomerID == -1)
+            {
+                // set the ThisCustomer property
+                CustomerList.ThisCustomer = ACustomer;
+                // Add the new record
+                CustomerList.Add();
+            }
+            // Otherwise it must be an update
+            else
+            {
+                // Find the record to update
+                CustomerList.ThisCustomer.Find(CustomerID);
+                // Set the ThisCustomer property
+                CustomerList.ThisCustomer = ACustomer;
+                // Update the record
+                CustomerList.Update();
+            }
+            // redirect back to the list page
             Response.Redirect("CustomerList.aspx");
         }
         else
         {
-            // Display the rror message
+            // Display the error message
             lblError.Text = Error;
         }
     }
@@ -116,5 +160,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtDate.Text = "Record not found";
             txtTotalSpent.Text = "Record not found";
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+
     }
 }
