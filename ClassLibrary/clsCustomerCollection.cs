@@ -30,6 +30,7 @@ namespace ClassLibrary
                 // Create a blank customer
                 clsCustomer ACustomer = new clsCustomer();
                 // Read in the field from the current record
+                ACustomer.CustomerID = Convert.ToInt32(DB.DataTable.Rows[Index]["Customer_ID"]);
                 ACustomer.IsCustomer = Convert.ToBoolean(DB.DataTable.Rows[Index]["Is_Customer"]);
                 ACustomer.AddressNo = Convert.ToInt32(DB.DataTable.Rows[Index]["AddressNo"]);
                 ACustomer.Address = Convert.ToString(DB.DataTable.Rows[Index]["Address"]);
@@ -104,6 +105,37 @@ namespace ClassLibrary
             DB.AddParameter("Total_Spent", mThisCustomer.TotalSpent);
             // Execute the query returning the primary key value
             return DB.Execute("sproc_tblCustomer_Insert");
+        }
+
+        public void Update()
+        {
+            // Update an existing record based on the values of thisCustomer
+            //Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // Set the parameters for the stored procedure
+            DB.AddParameter("@Customer_ID", mThisCustomer.CustomerID);
+            DB.AddParameter("@First_Name", mThisCustomer.FirstName);
+            DB.AddParameter("@Surname", mThisCustomer.Surname);
+            DB.AddParameter("AddressNo", mThisCustomer.AddressNo);
+            DB.AddParameter("Address", mThisCustomer.Address);
+            DB.AddParameter("Postcode", mThisCustomer.PostCode);
+            DB.AddParameter("Email", mThisCustomer.Email);
+            DB.AddParameter("Account_Creation_Date", mThisCustomer.AccountCreationDate);
+            DB.AddParameter("Is_Customer", mThisCustomer.IsCustomer);
+            DB.AddParameter("Total_Spent", mThisCustomer.TotalSpent);
+            // Execute the stored procedure
+            DB.Execute("sproc_tblCustomer_Update");
+        }
+
+        public void Delete()
+        {
+            // deletes the record pointed to by ThisCustomer
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // set the parameters for the stored procedure
+            DB.AddParameter("@CustomerID", mThisCustomer.CustomerID);
+            // Execute the stored procedure
+            DB.Execute("sproc_tblCustomer_Delete");
         }
     }
 }

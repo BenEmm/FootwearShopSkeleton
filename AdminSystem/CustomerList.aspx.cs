@@ -46,4 +46,46 @@ public partial class _Default : System.Web.UI.Page
         // Redirect to the data entry page
         Response.Redirect("CustomerDataEntry.aspx");
     }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        // var to store the primary key value of the record to be edited
+        Int32 CustomerID;
+        // if a record has been selected from the list
+        if (lstCustomerList.SelectedIndex != -1)
+        {
+            // Get the primary key value of the record to edit
+            CustomerID = Convert.ToInt32(lstCustomerList.SelectedValue);
+            // Store the data in the session object
+            Session["Customer_ID"] = CustomerID;
+            // Redirect to the edit page 
+            Response.Redirect("CustomerDataEntry.aspx");
+        }
+        else // if no record has been selected
+        {
+            // display an error
+            lblError.Text = "Please select a record to edit from the list";
+        }
+    }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        // var to store the primary key value of the record to be deleted
+        Int32 CustomerID;
+        // if a record has been selected from the list
+        if (lstCustomerList.SelectedIndex != -1)
+        {
+            // get the primary key value of the record to delete
+            CustomerID = Convert.ToInt32(lstCustomerList.SelectedValue);
+            // Store the data in the session object
+            Session["Customer_ID"] = CustomerID;
+            // Redirect to the delete page
+            Response.Redirect("DeleteCustomer.aspx");
+        }
+        else // if no record hs been selected
+        {
+            // display an error
+            lblError.Text = "Please select a record to delete from the list";
+        }
+    }
 }
