@@ -14,16 +14,25 @@ namespace ClassLibrary
         // Constructor for the class
         public clsCustomerCollection()
         {
-            // var for the index
-            Int32 Index = 0;
-            // Car to store the record count
-            Int32 RecordCount = 0;
-            // Object for data connection 
+            // Object for data connection
             clsDataConnection DB = new clsDataConnection();
             // Execute the stored procedure
             DB.Execute("sproc_tblCustomer_SelectAll");
+            // Populate the array list with the data table
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            // populates the array list based on the data table in the parameter DB
+            // var for the index
+            Int32 Index = 0;
+            // var to store the record count
+            Int32 RecordCount = 0;
             // Get the count of records
             RecordCount = DB.Count;
+            // clear the private array list
+            mCustomerList = new List<clsCustomer>();
             // While there are records to process
             while (Index < RecordCount)
             {
@@ -136,6 +145,19 @@ namespace ClassLibrary
             DB.AddParameter("@CustomerID", mThisCustomer.CustomerID);
             // Execute the stored procedure
             DB.Execute("sproc_tblCustomer_Delete");
+        }
+
+        public void ReportBySurname(string Surname)
+        {
+            // Filters the records based on a full or partial surname
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // Send the Surname parameter to the database
+            DB.AddParameter("@Surname", Surname);
+            // Execute the stored procedure
+            DB.Execute("sproc_tblCustomer_FilterBySurname");
+            // Populate the array list with the data table
+            PopulateArray(DB);
         }
     }
 }
