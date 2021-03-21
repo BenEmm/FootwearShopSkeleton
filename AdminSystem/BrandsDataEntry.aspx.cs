@@ -30,24 +30,39 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         // BrandID set by database (maybe)
 
-        Brand.BrandName = tbName.Text;
-        Brand.TopProduct = int.Parse(dropTop.SelectedValue);
-        Brand.LatestProduct = int.Parse(dropLatest.SelectedValue);
-        Brand.LastRestock = cdrRestock.SelectedDate;
-        Brand.IsListed = cbList.Checked;
+        string BrandName = tbName.Text;
+        string TopProduct = dropTop.SelectedValue;
+        string LatestProduct = dropLatest.SelectedValue;
+        string LastRestock = cdrRestock.SelectedDate.ToString();
 
         // avgPrice property needs to be calculated from a mean of a brand's products
 
         //store Brand in session object
-        Session["Brand"] = Brand;
-        Response.Redirect("BrandsViewer.aspx");
+        // if valid passes
+        string ErrorMsg = "";
+        ErrorMsg = Brand.Valid(BrandName, TopProduct, LatestProduct, LastRestock);
+        if (ErrorMsg == "")
+        {
+            Brand.BrandName = BrandName;
+            Brand.TopProduct = int.Parse(TopProduct);
+            Brand.LatestProduct = int.Parse(LatestProduct);
+            Brand.LastRestock = Convert.ToDateTime(LastRestock);
+            Brand.IsListed = cbList.Checked; 
+
+            Session["Brand"] = Brand;
+            Response.Write("BrandsViewer.aspx");
+        }
+        else
+        {
+            lblValidateError.Visible = true;
+            lblValidateError.Text = ErrorMsg;
+        }
     }
 
     protected void cdrRestock_SelectionChanged(object sender, EventArgs e)
     {
         
     }
-
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
@@ -75,6 +90,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
         catch (Exception)
         {
+            lblErrorAlert.Visible = true;
             lblErrorAlert.Text = "Invalid Brand ID: This field must be a positive integer.";
             return;
         }
@@ -90,10 +106,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblSelectedDate.Text = brand.LastRestock.ToString("dd/MM/yyyy");
             cbList.Checked = brand.IsListed;
             lblErrorAlert.Text = "";
+            lblErrorAlert.Visible = false;
         }
         else
         {
+            lblErrorAlert.Visible = true;
             lblErrorAlert.Text = "Brand " + tbName.Text + " was not found in the database.";
         }
+
+        
     }
 }

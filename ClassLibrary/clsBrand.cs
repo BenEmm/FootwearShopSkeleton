@@ -85,32 +85,32 @@ namespace ClassLibrary {
 
             if (brandName.Length == 0)
             {
-                ErrorMsg += "You must enter a brand name.\n";
+                ErrorMsg += "You must enter a brand name.<br />";
             }
-            else if (brandName.Length > 50)
+            if (brandName.Length > 50)
             {
-                ErrorMsg += "Your brand name is too long. Must be fewer than 50 characters long.\n";
+                ErrorMsg += "Your brand name is too long. Must be fewer than 50 characters long.<br />";
             }
-            else if (topProduct == "")
+            if (topProduct == "")
             {
-                ErrorMsg += "You must select a top product.\n";
+                ErrorMsg += "You must select a top product.<br />";
             }
-            else if (latestProduct == "")
+            if (latestProduct == "")
             {
-                ErrorMsg += "You must select a latest product.\n";
+                ErrorMsg += "You must select a latest product.<br />";
             }
-            else if (lastRestock == "")
+            if (lastRestock == "")
             {
-                ErrorMsg += "Please select a date\n";
+                ErrorMsg += "Please select a date<br />";
             }
-            else if (Convert.ToDateTime(lastRestock) < Convert.ToDateTime("31/12/2000"))
+            if (Convert.ToDateTime(lastRestock) < Convert.ToDateTime("31/12/2000"))
             {
                 // shouldnt accept a date in the far past (sql min date = 1753)
-                ErrorMsg += "Please enter a more recent date (after 31-12-2000).\n";
+                ErrorMsg += "Please enter a more recent date (after 31-12-2000).<br />";
             }
-            else if (Convert.ToDateTime(lastRestock) > DateTime.Now.Date)
+            if (Convert.ToDateTime(lastRestock) > DateTime.Now.Date)
             {
-                ErrorMsg += "Date cannot be in the future.\n";
+                ErrorMsg += "Date cannot be in the future.<br />";
             }
             
             return ErrorMsg;

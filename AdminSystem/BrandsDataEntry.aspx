@@ -36,6 +36,12 @@
             display:inline;
             float:left;
         }
+        .error  {
+            background-color: #cb4d4d;
+            width: auto;
+            text-align:center;
+            padding:;
+        }
     </style>
     <form id="form1" runat="server">
         <div class="inline">
@@ -44,7 +50,7 @@
 
             <hr />
 
-            <asp:Label ID="lblErrorAlert" class="label" runat="server" Text=""></asp:Label>
+            <asp:Label ID="lblErrorAlert" class="label error" runat="server" Visible="false"></asp:Label>
 
             <div class="row">
                 <asp:Label ID="lblBrandID" class="label" runat="server" Text="Brand ID: "></asp:Label>
@@ -53,6 +59,7 @@
                 <asp:Button ID="btnFind" runat="server" Text="Find" OnClick="btnFind_Click" />
             </div>
             <hr />
+            <asp:Label ID="lblValidateError" class="label error" runat="server" Visible="false"></asp:Label>
             <br />
             <div class="row">
                 <asp:Label ID="lblName" class="label" runat="server" Text="Brand name: "></asp:Label>
