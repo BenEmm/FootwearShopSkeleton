@@ -57,7 +57,7 @@ namespace ClassLibrary
         }
 
         private string mPosition;
-        public string Positon
+        public string Position
         {
             get
             {

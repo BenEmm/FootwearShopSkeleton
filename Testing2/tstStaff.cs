@@ -83,9 +83,9 @@ namespace Testing2
             //create some test data to assign to the property
             string TestData = "Weekend Staff";
             //assign the data to the property
-            AStaff.Positon = TestData;
+            AStaff.Position = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AStaff.Positon, TestData);
+            Assert.AreEqual(AStaff.Position, TestData);
         }
 
         [TestMethod]
@@ -231,7 +231,7 @@ namespace Testing2
             //invoke the method 
             found = AStaff.Find(StaffID);
             //check the staffID
-            if (AStaff.Positon != "Weekend Staff")
+            if (AStaff.Position != "Weekend Staff")
             {
                 OK = false;
             }

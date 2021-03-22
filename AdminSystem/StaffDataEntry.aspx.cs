@@ -35,7 +35,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         txtFullName.Text = AllStaff.ThisStaff.FullName;
         txtSalary.Text = AllStaff.ThisStaff.Salary.ToString();
         txtDateOfJoining.Text = AllStaff.ThisStaff.DateOfJoining.ToString();
-        txtPositon.Text = AllStaff.ThisStaff.Positon;
+        txtPositon.Text = AllStaff.ThisStaff.Position;
         chkFullTime.Checked = AllStaff.ThisStaff.FullTime;
         chkActive.Checked = AllStaff.ThisStaff.Active;
     }
@@ -61,7 +61,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //capture date of leaving
             AStaff.DateOfJoining = DateTime.Parse(txtDateOfJoining.Text);
             //capture position
-            AStaff.Positon = txtPositon.Text;
+            AStaff.Position = txtPositon.Text;
             //capture full time
             AStaff.FullTime = chkFullTime.Checked;
             //capture active
@@ -118,7 +118,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtFullName.Text = AStaff.FullName;
             txtSalary.Text = AStaff.Salary.ToString();
             txtDateOfJoining.Text = AStaff.DateOfJoining.ToString();
-            txtPositon.Text = AStaff.Positon;
+            txtPositon.Text = AStaff.Position;
             chkFullTime.Checked = AStaff.FullTime;
             chkActive.Checked = AStaff.Active;
         }
