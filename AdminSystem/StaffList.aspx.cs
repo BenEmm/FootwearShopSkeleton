@@ -61,4 +61,55 @@ public partial class _Default : System.Web.UI.Page
             lblError.Text = "Please select a record to delete from the list";
         }
     }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        //var to store the primary key of the record to be deleted
+        Int32 StaffID;
+        //if a record has been selected from the list
+        if (lstStaffList.SelectedIndex != -1)
+        {
+            //get the primary key of the value to be deleted 
+            StaffID = Convert.ToInt32(lstStaffList.SelectedValue);
+            //store the data in the session object 
+            Session["StaffID"] = StaffID;
+            //redirect to the delete page 
+            Response.Redirect("StaffConfirmDelete.aspx");
+        }
+        else //if no record has been selected
+        {
+            //display an error
+            lblError.Text = "Please select a record to delete from the list";
+        }
+    }
+
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        //create an instance of the staff collection
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ReportByPosition(txtPosition.Text);
+        lstStaffList.DataSource = Staff.StaffList;
+        //set the name of the primary key
+        lstStaffList.DataValueField = "StaffID";
+        //set the name of the field to display
+        lstStaffList.DataTextField = "FullName";
+        //bind the data to the list
+        lstStaffList.DataBind();
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        //create an instance of the staff collection
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ReportByPosition("");
+        //clear any existing filter
+        txtPosition.Text = "";
+        lstStaffList.DataSource = Staff.StaffList;
+        //set the name of the primary key
+        lstStaffList.DataValueField = "StaffID";
+        //set the name of the field to display
+        lstStaffList.DataTextField = "FullName";
+        //bind the data to the list
+        lstStaffList.DataBind();
+    }
 }

@@ -19,7 +19,7 @@ public partial class _1Viewer : System.Web.UI.Page
         Response.Write(AStaff.FullName + "\n");
         Response.Write(AStaff.Salary + "\n");
         Response.Write(AStaff.DateOfJoining + "\n");
-        Response.Write(AStaff.Positon + "\n");
+        Response.Write(AStaff.Position + "\n");
         Response.Write(AStaff.FullTime + "\n");
         Response.Write(AStaff.Active + "\n");
     }
