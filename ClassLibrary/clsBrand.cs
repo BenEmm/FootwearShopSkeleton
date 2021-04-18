@@ -14,7 +14,7 @@ namespace ClassLibrary {
         private bool isListed;
         
         //public properties & getters/setters
-        public Int32 BrandID { get { return brandId; } private set { brandId = value; } } // cannot set this outside of class, the DB assigns the number, this class will fetch the num to be set here.
+        public Int32 BrandID { get { return brandId; } /*private */ set { brandId = value; } } // cannot set this outside of class, the DB assigns the number, this class will fetch the num to be set here.
         public string BrandName { get { return brandName; } set { brandName = value; } }
         public int TopProduct { get { return topProduct; } set { topProduct = value; } }
         public int LatestProduct { get { return latestProduct; } set { latestProduct = value; } }

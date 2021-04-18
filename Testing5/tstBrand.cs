@@ -244,7 +244,7 @@ namespace Testing5
             ErrorMsg = brand.Valid("", TopProduct, LatestProduct, LastRestock);
 
             // Check the error message matches expected result (error)
-            Assert.AreEqual(ErrorMsg, "You must enter a brand name.\n");
+            Assert.AreEqual(ErrorMsg, "You must enter a brand name.<br />");
 
         }
 
@@ -329,7 +329,7 @@ namespace Testing5
             ErrorMsg = brand.Valid(maxAddOne, TopProduct, LatestProduct, LastRestock);
 
             // Check the error message matches expected result (no error)
-            Assert.AreEqual(ErrorMsg, "Your brand name is too long. Must be fewer than 50 characters long.\n");
+            Assert.AreEqual(ErrorMsg, "Your brand name is too long. Must be fewer than 50 characters long.<br />");
         }
 
         [TestMethod]
@@ -348,7 +348,7 @@ namespace Testing5
             ErrorMsg = brand.Valid(extremeMax, TopProduct, LatestProduct, LastRestock);
 
             // Check the error message matches expected result (no error)
-            Assert.AreEqual(ErrorMsg, "Your brand name is too long. Must be fewer than 50 characters long.\n");
+            Assert.AreEqual(ErrorMsg, "Your brand name is too long. Must be fewer than 50 characters long.<br />");
         }
 
 
@@ -368,7 +368,7 @@ namespace Testing5
 
             ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, ExtremeMin);
 
-            Assert.AreEqual(ErrorMsg, "Please enter a more recent date (after 31-12-2000).\n");
+            Assert.AreEqual(ErrorMsg, "Please enter a more recent date (after 31-12-2000).<br />");
         }
 
 
@@ -383,7 +383,7 @@ namespace Testing5
 
             ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, MinMinusOne);
 
-            Assert.AreEqual(ErrorMsg, "Please enter a more recent date (after 31-12-2000).\n");
+            Assert.AreEqual(ErrorMsg, "Please enter a more recent date (after 31-12-2000).<br />");
         }
 
         [TestMethod]
@@ -460,7 +460,7 @@ namespace Testing5
 
             ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, MaxPlusOne);
             // Error message expected
-            Assert.AreEqual(ErrorMsg, "Date cannot be in the future.\n");
+            Assert.AreEqual(ErrorMsg, "Date cannot be in the future.<br />");
         }
 
 
@@ -477,7 +477,7 @@ namespace Testing5
 
             ErrorMsg = brand.Valid(BrandName, TopProduct, LatestProduct, ExtremeMax);
             // Error message expected
-            Assert.AreEqual(ErrorMsg, "Date cannot be in the future.\n");
+            Assert.AreEqual(ErrorMsg, "Date cannot be in the future.<br />");
         }
     }
 }
