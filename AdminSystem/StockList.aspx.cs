@@ -100,17 +100,18 @@ public partial class _Default : System.Web.UI.Page
 
     protected void btnClear_Click(object sender, EventArgs e)
     {
-        //create an instance of the stock collection 
+        //create an instance of the staff collection
         clsStockCollection Stock = new clsStockCollection();
         Stock.FilterByStockDescription("");
-        //clear any existing filter to tidy up the interface
+        //clear any existing filter
         txtFilter.Text = "";
         lstStockList.DataSource = Stock.StockList;
         //set the name of the primary key
         lstStockList.DataValueField = "StockID";
         //set the name of the field to display
-        lstStockList.DataValueField = "StockDescription";
+        lstStockList.DataTextField = "StockDescription";
         //bind the data to the list
         lstStockList.DataBind();
+
     }
 }
