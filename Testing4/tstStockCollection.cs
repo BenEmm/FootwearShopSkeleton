@@ -224,22 +224,22 @@ namespace Testing4
         [TestMethod]
         public void FilterByStockDescriptionTestDataFound()
         {
-            //create an instance of the filtered data
-            clsStockCollection FilteredStockDescription = new clsStockCollection();
+            //create an instance of the filtered data 
+            clsStockCollection FilteredStock = new clsStockCollection();
             //var to store the outcome
             Boolean OK = true;
-            //apply a description that exists
-            FilteredStockDescription.FilterByStockDescription("Converse");
+            //apply a stock ID that exists
+            FilteredStock.FilterByStockDescription("testing");
             //check that the correct number of records are found
-            if(FilteredStockDescription.Count == 2)
+            if(FilteredStock.Count == 2)
             {
-                //check that the firt record ID is 1031
-                if(FilteredStockDescription.StockList[0].StockID != 1031)
+                //check that the first record is ID 2044
+                if(FilteredStock.StockList[0].StockID != 2050)
                 {
                     OK = false;
                 }
-                //check that the second record ID is 1040
-                if(FilteredStockDescription.StockList[1].StockID != 1040)
+                //check that the second record is 2063
+                if(FilteredStock.StockList[1].StockID != 2063)
                 {
                     OK = false;
                 }
@@ -248,7 +248,8 @@ namespace Testing4
             {
                 OK = false;
             }
-            //test to see that there are no records
+          
+
             Assert.IsTrue(OK);
         }
     }
