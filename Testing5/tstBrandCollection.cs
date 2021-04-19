@@ -61,5 +61,34 @@ namespace Testing5
             // test that they both have same count
             Assert.AreEqual(AllBrands.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void TestAddMethod()
+        {
+            // create collection instance
+            clsBrandCollection AllBrands = new clsBrandCollection();
+            //create brand item
+            clsBrand Brand = new clsBrand();
+            // PK variable
+            Int32 PK = 0;
+            // set fields
+            Brand.BrandID = 1;
+            Brand.BrandName = "TestBrandInc";
+            Brand.TopProduct = 2;
+            Brand.LatestProduct = 2;
+            Brand.LastRestock = DateTime.Now.Date;
+            Brand.AvgPrice = 0.00;
+            Brand.IsListed = false;
+            // set ThisAddress to Brand object
+            AllBrands.ThisBrand = Brand;
+            //add record
+            PK = AllBrands.Add();
+            // set primary key
+            Brand.BrandID = PK;
+            // find the record
+            AllBrands.ThisBrand.Find(PK);
+            // test objects are equal
+            Assert.AreEqual(AllBrands.ThisBrand, Brand);
+        }
     }
 }
