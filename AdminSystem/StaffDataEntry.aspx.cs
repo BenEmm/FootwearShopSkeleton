@@ -102,6 +102,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnFind_Click(object sender, EventArgs e)
     {
+        lblError.Text = "";
         //create and instance of the staff class
         clsStaff AStaff = new clsStaff();
         //variable to store the primary key 
@@ -121,8 +122,18 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtPositon.Text = AStaff.Position;
             chkFullTime.Checked = AStaff.FullTime;
             chkActive.Checked = AStaff.Active;
+        }else
+        {
+            lblError.Text = "Staff member not found";
         }
-
+        
        
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        //takes you back to the staff list
+        Response.Redirect("StaffList.aspx");
+
     }
 }

@@ -15,7 +15,7 @@
         <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="Edit" />
         <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" />
         <p>
-            <asp:Label ID="lblMessage" runat="server" Text="Enter the Position"></asp:Label>
+            <asp:Label ID="lblMessage" runat="server" Text="Enter the staff's Position"></asp:Label>
             <asp:TextBox ID="txtPosition" runat="server"></asp:TextBox>
         </p>
         <p>
