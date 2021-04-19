@@ -11,11 +11,12 @@ namespace ClassLibrary
     {
         //private fields
         private List<clsBrand> mBrandList = new List<clsBrand>();
+        private clsBrand mThisBrand = new clsBrand();
 
         //public properties 
         public List<clsBrand> BrandList { get { return mBrandList; } set { mBrandList = value; } }
         public int Count { get { return BrandList.Count; } set { } }
-        public clsBrand ThisBrand { get; set; }
+        public clsBrand ThisBrand { get { return mThisBrand; } set { mThisBrand = value; } }
 
 
         // class constructor
@@ -43,6 +44,20 @@ namespace ClassLibrary
             }
 
         }
+
+        // add
+        public Int32 Add() {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@BrandName", mThisBrand.BrandName);
+            DB.AddParameter("@TopProduct", mThisBrand.TopProduct);
+            DB.AddParameter("@LatestProduct", mThisBrand.LatestProduct);
+            DB.AddParameter("@LastRestock", mThisBrand.LastRestock);
+            DB.AddParameter("@AvgPrice", mThisBrand.AvgPrice);
+            DB.AddParameter("@IsListed", mThisBrand.IsListed);
+
+            return DB.Execute("sproc_tblBrands_Insert");
+        }
+
     }
 
 }

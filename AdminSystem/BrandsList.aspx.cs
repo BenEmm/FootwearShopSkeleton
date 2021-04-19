@@ -34,4 +34,12 @@ public partial class _1_List : System.Web.UI.Page
     {
 
     }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        // store -1 into session object to show this is a new record
+        Session["BrandID"] = -1;
+        // redirect to data entry page
+        Response.Redirect("BrandsDataEntry.aspx");
+    }
 }

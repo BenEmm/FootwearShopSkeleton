@@ -26,15 +26,15 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
+        // create brand instance
         clsBrand Brand = new clsBrand();
-
-        // BrandID set by database (maybe)
-
+    
+        // retreive field values
         string BrandName = tbName.Text;
         string TopProduct = dropTop.SelectedValue;
         string LatestProduct = dropLatest.SelectedValue;
         string LastRestock = cdrRestock.SelectedDate.ToString();
-
+        
         // avgPrice property needs to be calculated from a mean of a brand's products
 
         //store Brand in session object
@@ -47,10 +47,16 @@ public partial class _1_DataEntry : System.Web.UI.Page
             Brand.TopProduct = int.Parse(TopProduct);
             Brand.LatestProduct = int.Parse(LatestProduct);
             Brand.LastRestock = Convert.ToDateTime(LastRestock);
-            Brand.IsListed = cbList.Checked; 
+            Brand.IsListed = cbList.Checked;
 
-            Session["Brand"] = Brand;
-            Response.Write("BrandsViewer.aspx");
+            // create a collection instance
+            clsBrandCollection BrandList = new clsBrandCollection();
+            // set ThisBrand property
+            BrandList.ThisBrand = Brand;
+            // invoke Add method
+            BrandList.Add();
+            // redirect back to list
+            Response.Redirect("BrandsList.aspx");
         }
         else
         {

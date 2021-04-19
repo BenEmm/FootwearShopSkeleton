@@ -63,7 +63,7 @@
             <br />
             <div class="row">
                 <asp:Label ID="lblName" class="label" runat="server" Text="Brand name: "></asp:Label>
-                <asp:TextBox ID="tbName" runat="server" Width="152px" Wrap="False"></asp:TextBox>
+                <asp:TextBox ID="tbName" runat="server" Width="152px" Wrap="False">asd#</asp:TextBox>
             </div>
             <div class="row" style="height: 26px; width: 263px;">
                 <asp:Label ID="lblTop" runat="server" class="label" Text="Top product: "></asp:Label>
