@@ -18,14 +18,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
         //Find the customer name
-        AnOrder.CustomerName = txtCustomerName.Text;
-        AnOrder.Email = txtEmail.Text;
-        AnOrder.TrackingNumber = txtTrackingNo.Text;
-        AnOrder.TotalPrice = int.Parse(txtTotalPrice.Text);
-        AnOrder.Quantity = int.Parse(txtQuantity.Text);
-        AnOrder.ShippingDate = DateTime.Parse(txtShippingDate.Text);
-        AnOrder.OrderNumber = int.Parse(txtOrderNo.Text);
-      
+        string CustomerName = txtCustomerName.Text;
+        string Email = txtEmail.Text;
+        string TrackingNumber = txtTrackingNo.Text;
+        string TotalPrice = txtTotalPrice.Text;
+        string Quantity = txtQuantity.Text;
+        string ShippingDate = txtShippingDate.Text;
+        string OrderNumber = txtOrderNo.Text;
+
 
 
         //Store customer name in the session object
@@ -36,4 +36,32 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
 
 
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        //create an instance of the order class
+        clsOrder AnOrder = new clsOrder();
+
+        Int32 OrderNumber;
+
+        Boolean Found = false;
+
+        OrderNumber = Convert.ToInt32(txtOrderNo.Text);
+
+        Found = AnOrder.Find(OrderNumber);
+
+        if (Found == true)
+        {
+            txtCustomerName.Text = AnOrder.CustomerName;
+            txtEmail.Text = AnOrder.Email;
+            txtTrackingNo.Text = AnOrder.TrackingNumber;
+            txtOrderNo.Text = AnOrder.OrderNumber.ToString();
+            txtQuantity.Text = AnOrder.Quantity.ToString();
+            txtShippingDate.Text = AnOrder.ShippingDate.ToString();
+            txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
+            txtTrackingNo.Text = AnOrder.TrackingNumber;
+
+        }
+
+    }
 }
