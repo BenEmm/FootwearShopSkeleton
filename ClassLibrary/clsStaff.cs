@@ -95,6 +95,14 @@ namespace ClassLibrary
             }
         }
 
+        public String namePosition
+        {
+            get
+            {
+                return mFullName + "; " + mPosition;
+            }
+        }
+
         public bool Find(int StaffID)
         {
 
