@@ -92,7 +92,7 @@ public partial class _Default : System.Web.UI.Page
         //set the name of the primary key
         lstStaffList.DataValueField = "StaffID";
         //set the name of the field to display
-        lstStaffList.DataTextField = "FullName";
+        lstStaffList.DataTextField = "namePosition";
         //bind the data to the list
         lstStaffList.DataBind();
     }
