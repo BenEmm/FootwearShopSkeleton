@@ -272,17 +272,17 @@ namespace Testing1
             // Var to store the outcome
             Boolean OK = true;
             // Apply a Surname that doesn't exist
-            FilteredSurnames.ReportBySurname("XYZ");
+            FilteredSurnames.ReportBySurname("Jefferson");
             // Check that the correct number of records are found 
             if (FilteredSurnames.Count == 2)
             {
                 // Check that the first record id is 1020
-                if (FilteredSurnames.CustomerList[0].CustomerID != 1020)
+                if (FilteredSurnames.CustomerList[0].CustomerID != 1024)
                 {
                     OK = false;
                 }
                 // Check that the first record is ID 1021
-                if (FilteredSurnames.CustomerList[1].CustomerID != 1021)
+                if (FilteredSurnames.CustomerList[1].CustomerID != 1025)
                 {
                     OK = false;
                 }
