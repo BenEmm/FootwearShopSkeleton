@@ -8,16 +8,16 @@ namespace Testing5
 
     public class tstBrand
     {
-        // create an instance of class Brand for this scope.
-        clsBrand brand = new clsBrand("Nike", 2, 2, new System.DateTime(2020, 10, 11), true);
-
+        clsBrand Brand = new clsBrand();
         // test data
+        Int32 BrandID = 0;
         string BrandName = "Sketchers";
         string TopProduct = "Light-Ups";
         string LatestProduct = "Sketchers Runners";
         string LastRestock = DateTime.Today.ToString();
         // isListed ignored
         // avgPrice is calculated and not validated.
+        
 
         [TestMethod]
         public void InstanceOK()
@@ -26,7 +26,7 @@ namespace Testing5
             Assert.IsNotNull(notABrand);
 
             // test full constructor
-            Assert.IsNotNull(brand);
+            Assert.IsNotNull(Brand);
         }
 
 
@@ -35,13 +35,11 @@ namespace Testing5
         public void PrimaryKeyOK()
         {
             // a brand obtains an ID when its added to DB (since the 
-            // table header is denoted by the DB and not the middle layer).
-
-
-            clsBrand notABrand = new clsBrand();
-            int testBrandID = brand.BrandID;
-            Assert.IsTrue(testBrandID > 0); // means it was assigned an ID using sproc
-            Assert.IsTrue(notABrand.BrandID == 0); // means the non-brand object was not assigned a num/added to db.
+            // table header is denoted by the DB and not the middle layer
+            clsBrand Brand = new clsBrand();
+            Int32 TestData = 1395;
+            Brand.BrandID = TestData;
+            Assert.AreEqual(Brand.BrandID, TestData);
         }
 
         [TestMethod] 
@@ -49,41 +47,41 @@ namespace Testing5
         {
             string TestData = "Adidas";
             //assign
-            brand.BrandName = TestData;
+            Brand.BrandName = TestData;
             //test are equal
-            Assert.AreEqual(brand.BrandName, TestData);
+            Assert.AreEqual(Brand.BrandName, TestData);
         }
 
         [TestMethod]
         public void TestTopProduct()
         {
             int TestData = 3;
-            brand.TopProduct = TestData;
-            Assert.AreEqual(brand.TopProduct, TestData);
+            Brand.TopProduct = TestData;
+            Assert.AreEqual(Brand.TopProduct, TestData);
         }
 
         [TestMethod]
         public void TestLatestProduct()
         {
             int TestData = 1;
-            brand.TopProduct = TestData;
-            Assert.AreEqual(brand.TopProduct, TestData);
+            Brand.TopProduct = TestData;
+            Assert.AreEqual(Brand.TopProduct, TestData);
         }
 
         [TestMethod]
         public void TestLastRestock()
         {
             DateTime TestData = new DateTime(2020, 12, 31);// some date
-            brand.LastRestock = TestData;
-            Assert.AreEqual(brand.LastRestock, TestData);
+            Brand.LastRestock = TestData;
+            Assert.AreEqual(Brand.LastRestock, TestData);
         }
 
         [TestMethod]
         public void TestAvgPrice()
         {
             double TestData = 10.99;
-            brand.AvgPrice = TestData;
-            Assert.AreEqual(brand.AvgPrice, TestData);
+            Brand.AvgPrice = TestData;
+            Assert.AreEqual(Brand.AvgPrice, TestData);
         }
 
         [TestMethod]
@@ -93,9 +91,9 @@ namespace Testing5
             clsBrand notABrand = new clsBrand(); 
             // also create test data, and assign test data to global Brand
             bool TestData = true;
-            brand.IsListed = TestData;
+            Brand.IsListed = TestData;
             // test global Brand
-            Assert.AreEqual(brand.IsListed, TestData);
+            Assert.AreEqual(Brand.IsListed, TestData);
             //also test notABRand
             Assert.AreEqual(notABrand.IsListed, false);
         }
@@ -106,7 +104,7 @@ namespace Testing5
         {
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
-            Int32 Id = 3;
+            Int32 Id = 1395;
             Found = ABrand.Find(Id);
 
             Assert.IsTrue(Found);
@@ -118,9 +116,9 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 3;
+            Int32 Id = 1395;
             Found = ABrand.Find(Id);
-            if (ABrand.BrandID != 3)
+            if (ABrand.BrandID != 1395)
             {
                 OK = false;
             }
@@ -133,9 +131,9 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 3;
+            Int32 Id = 1395;
             Found = ABrand.Find(Id);
-            if (ABrand.BrandName != "Nike")
+            if (ABrand.BrandName != "TestBrandInc")
             {
                 OK = false;
             }
@@ -148,7 +146,7 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 3;
+            Int32 Id = 1395;
             Found = ABrand.Find(Id);
             if (ABrand.TopProduct != 2)
             {
@@ -163,7 +161,7 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 3;
+            Int32 Id = 1395;
             Found = ABrand.Find(Id);
             if (ABrand.LatestProduct != 2)
             {
@@ -178,9 +176,9 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 3;
+            Int32 Id = 1395;
             Found = ABrand.Find(Id);
-            if (ABrand.LastRestock != Convert.ToDateTime("11/10/2020"))
+            if (ABrand.LastRestock != Convert.ToDateTime("06/05/2021"))
             {
                 OK = false;
             }
@@ -208,9 +206,9 @@ namespace Testing5
             clsBrand ABrand = new clsBrand();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Id = 3;
+            Int32 Id = 1395;
             Found = ABrand.Find(Id);
-            if (ABrand.IsListed != true)
+            if (ABrand.IsListed != false)
             {
                 OK = false;
             }

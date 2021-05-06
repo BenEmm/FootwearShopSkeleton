@@ -8,10 +8,21 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    // PK with access from within this class
+    Int32 BrandID;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        BrandID = Convert.ToInt32(Session["BrandID"]);
+        if (!IsPostBack)
+        {
+            if (BrandID != -1)
+            {
+                // display data for current record
+                DisplayBrand();
+            }
+            
+        }
     }
 
     protected void dropTop_SelectedIndexChanged(object sender, EventArgs e)
@@ -43,6 +54,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
         ErrorMsg = Brand.Valid(BrandName, TopProduct, LatestProduct, LastRestock);
         if (ErrorMsg == "")
         {
+            // capture brand id
+            Brand.BrandID = BrandID;
+
             Brand.BrandName = BrandName;
             Brand.TopProduct = int.Parse(TopProduct);
             Brand.LatestProduct = int.Parse(LatestProduct);
@@ -51,10 +65,24 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
             // create a collection instance
             clsBrandCollection BrandList = new clsBrandCollection();
-            // set ThisBrand property
-            BrandList.ThisBrand = Brand;
-            // invoke Add method
-            BrandList.Add();
+            //add
+            if (Brand.BrandID == -1) 
+            {
+                // set ThisBrand
+                BrandList.ThisBrand = Brand;
+                // add record
+                BrandList.Add();
+            }
+
+            // otherwise we update
+            else
+            {
+                BrandList.ThisBrand.Find(BrandID);
+                // set ThisAddress
+                BrandList.ThisBrand = Brand;
+                // update
+                BrandList.Update();
+            }
             // redirect back to list
             Response.Redirect("BrandsList.aspx");
         }
@@ -72,7 +100,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("BrandsList.aspx");
     }
 
     protected void btnShowCalendar_click(object sender, EventArgs e)
@@ -118,8 +146,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
         {
             lblErrorAlert.Visible = true;
             lblErrorAlert.Text = "Brand " + tbName.Text + " was not found in the database.";
-        }
+        } 
+    }
 
-        
+    void DisplayBrand()
+    {
+        // create brand collection
+        clsBrandCollection AllBrands = new clsBrandCollection();
+        //find record to update
+        AllBrands.ThisBrand.Find(BrandID);
+        //display data for this brand
+        tbBrandID.Text = AllBrands.ThisBrand.BrandID.ToString();
+        tbName.Text = AllBrands.ThisBrand.BrandName.ToString();
+        dropTop.SelectedIndex = AllBrands.ThisBrand.TopProduct;
+        dropLatest.SelectedIndex = AllBrands.ThisBrand.LatestProduct;
+        cdrRestock.SelectedDate = AllBrands.ThisBrand.LastRestock;
+        cbList.Checked = AllBrands.ThisBrand.IsListed;
     }
 }
