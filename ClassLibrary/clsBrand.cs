@@ -4,7 +4,7 @@ namespace ClassLibrary {
 
     public class clsBrand
     {
-        //encapsulated fields 
+        // fields 
         private Int32 brandId;
         private string brandName;
         private int topProduct;
@@ -33,20 +33,6 @@ namespace ClassLibrary {
             IsListed = false;
         }
 
-        // full constructor
-        public clsBrand(string name, int tProduct, int lProduct, DateTime restock, bool isListed) 
-        {
-            BrandName = name;
-            TopProduct = tProduct;
-            LatestProduct = lProduct;
-            LastRestock = restock;
-            AvgPrice = calculateAvgPrice();
-            IsListed = isListed;
-            AddToDatabase(this);
-            BrandID = FindBrandID(); // the num of the last db entry
-        }
-
-
         public void Delete()
         {
             clsDataConnection connection = new clsDataConnection();
@@ -58,7 +44,7 @@ namespace ClassLibrary {
         {
             clsDataConnection connection = new clsDataConnection();
             connection.AddParameter("@BrandID", brandId);
-            connection.Execute("sproc_FindByBrandID");
+            connection.Execute("sproc_tblBrand_FindByBrandID");
 
             // if a record exists in connection database
             if (connection.Count == 1)
@@ -118,17 +104,9 @@ namespace ClassLibrary {
 
 
         // functionality needed
-        public double calculateAvgPrice()  
+        public double calculateAvgPrice()
         {
             return 0.00;
-        }
-        
-
-        // may not use
-        private int FindBrandID()
-        {
-            clsDataConnection connection = new clsDataConnection();
-            return connection.Execute("sproc_Get_LastRow");
         }
 
         public override bool Equals(Object obj)
@@ -142,21 +120,6 @@ namespace ClassLibrary {
 
             return this.BrandID == other.BrandID;
         }
-
-        public void AddToDatabase(clsBrand brand)
-        {
-            // converts a DateTime variable to sql DATE format.
-            string sqlRestockDate = (brand.LastRestock.Year + brand.LastRestock.Month + brand.LastRestock.Day).ToString();
-            clsDataConnection connection = new clsDataConnection();
-            connection.AddParameter("@BrandName", brand.BrandName);
-            connection.AddParameter("@TopProduct", brand.TopProduct);
-            connection.AddParameter("@LatestProduct", brand.LatestProduct);
-            connection.AddParameter("@LastRestock ", sqlRestockDate);
-            connection.AddParameter("@AvgPrice", brand.AvgPrice);
-            connection.AddParameter("@IsListed", brand.IsListed);
-            connection.Execute("sproc_Brand_Add");
-        }
-
         
     }
 
